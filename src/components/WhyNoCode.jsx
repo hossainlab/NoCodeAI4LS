@@ -34,7 +34,7 @@ export default function WhyNoCode() {
       <div className="container">
         
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Why No Code?</h2>
+          <h2 className="sectionTitle">Why No Code?</h2>
         </div>
 
         <div className={styles.contentSection}>

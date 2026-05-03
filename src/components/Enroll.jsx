@@ -6,54 +6,68 @@ export default function Enroll() {
     "Hands-on omics & clinical AI projects",
     "Access to all session recordings",
     "Guided literature review & agentic workflow labs",
-    "1 complete, submittable research output",
     "Certificate of completion",
+  ];
+
+  const plans = [
+    {
+      badge: 'Student',
+      amount: '3,060',
+      note: 'For undergraduate & graduate students',
+      cta: 'Enroll as Student',
+      featured: false,
+    },
+    {
+      badge: 'Professional',
+      amount: '4,080',
+      note: 'For researchers, clinicians & industry professionals',
+      cta: 'Enroll as Professional',
+      featured: true,
+    },
   ];
 
   return (
     <section className={styles.enrollSection} id="enroll">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Enroll Now</h2>
+          <h2 className="sectionTitle">Enroll Now</h2>
           <p className={styles.subtitle}>Secure your seat before the cohort fills up.</p>
         </div>
 
         <div className={styles.cardWrapper}>
-          <div className={styles.card}>
-            <div className={styles.badge}>Student Discount</div>
+          {plans.map((plan) => (
+            <div key={plan.badge} className={`${styles.card} ${plan.featured ? styles.featuredCard : ''}`}>
+              {plan.featured && <div className={styles.popularBadge}>Most Popular</div>}
+              <div className={styles.badge}>{plan.badge}</div>
 
-            <div className={styles.pricing}>
-              <span className={styles.originalPrice}>৳5,100</span>
-              <div className={styles.discountedPrice}>
-                <span className={styles.currency}>৳</span>
-                <span className={styles.amount}>2,040</span>
+              <div className={styles.pricing}>
+                <div className={styles.discountedPrice}>
+                  <span className={styles.currency}>৳</span>
+                  <span className={styles.amount}>{plan.amount}</span>
+                </div>
               </div>
-              <span className={styles.savingsTag}>Save 60%</span>
+
+              <p className={styles.pricingNote}>{plan.note}</p>
+
+              <ul className={styles.includesList}>
+                {includes.map((item, index) => (
+                  <li key={index} className={styles.includesItem}>
+                    <svg className={styles.check} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a href="https://forms.gle/JxCSxh27PVLuLzNz9" target="_blank" rel="noopener noreferrer" className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'} ${styles.ctaButton}`}>
+                {plan.cta}
+              </a>
+
+              <p className={styles.disclaimer}>One-time payment · No recurring charges</p>
             </div>
-
-            <p className={styles.pricingNote}>One-time payment · No recurring charges</p>
-
-            <ul className={styles.includesList}>
-              {includes.map((item, index) => (
-                <li key={index} className={styles.includesItem}>
-                  <svg className={styles.check} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a href="https://forms.gle/JxCSxh27PVLuLzNz9" target="_blank" rel="noopener noreferrer" className={`btn btn-primary ${styles.ctaButton}`}>
-              Enroll at ৳2,040
-            </a>
-
-            <p className={styles.disclaimer}>
-              Discounted price available for students only. Cohort seats are limited.
-            </p>
-          </div>
+          ))}
         </div>
-
       </div>
 
       <div className={styles.glow}></div>

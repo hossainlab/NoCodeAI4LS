@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
       <div className={`container ${styles.heroContent} animate-fade-in`}>
-        <Image src="/NoCodeAI4LS/logo.png" alt="Program Logo" width={80} height={80} className={styles.heroLogo} priority />
+        <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH}/logo.png`} alt="Program Logo" width={80} height={80} className={styles.heroLogo} priority />
         <div className={styles.badge}>Next-Gen Education</div>
         <h1 className={styles.title}>
           No Code & <span className="text-gradient">Agentic AI</span><br />

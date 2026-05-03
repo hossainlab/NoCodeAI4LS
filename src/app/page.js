@@ -6,6 +6,7 @@ import WhoIsThisFor from "@/components/WhoIsThisFor";
 import Benefits from "@/components/Benefits";
 import Curriculum from "@/components/Curriculum";
 import Outcomes from "@/components/Outcomes";
+import Certificate from "@/components/Certificate";
 import Enroll from "@/components/Enroll";
 import Mentor from "@/components/Mentor";
 import Footer from "@/components/Footer";
@@ -21,6 +22,7 @@ export default function Home() {
       <Benefits />
       <Curriculum />
       <Outcomes />
+      <Certificate />
       <Enroll />
       <Mentor />
       <Footer />

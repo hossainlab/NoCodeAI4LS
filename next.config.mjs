@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.GITHUB_ACTIONS === 'true';
+const basePath = isProd ? '/NoCodeAI4LS' : '';
+
 const nextConfig = {
   output: 'export',
-  basePath: '/NoCodeAI4LS',
+  basePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
     unoptimized: true,
   },

@@ -40,7 +40,7 @@ export default function Outcomes() {
     <section className={styles.outcomesSection} id="outcomes">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Program Outcomes</h2>
+          <h2 className="sectionTitle">Program Outcomes</h2>
           <p className={styles.subtitle}>After this program, you will be able to:</p>
         </div>
         <div className={styles.grid}>

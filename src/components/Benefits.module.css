@@ -8,19 +8,6 @@
   margin-bottom: 4rem;
 }
 
-.sectionTitle {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
-  font-size: 2rem;
-  font-weight: 800;
-  color: white;
-  box-shadow: 0 4px 15px var(--accent-glow);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
 .benefitsList {
   display: flex;
   flex-direction: column;
@@ -89,18 +76,10 @@
     align-items: center;
     text-align: center;
   }
-
-  .sectionTitle {
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 480px) {
   .benefitItem {
     padding: 1.5rem 1rem;
-  }
-  .sectionTitle {
-    font-size: 1.2rem;
-    padding: 0.6rem 1.2rem;
   }
 }

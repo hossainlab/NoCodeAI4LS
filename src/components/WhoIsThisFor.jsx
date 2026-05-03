@@ -23,7 +23,7 @@ export default function WhoIsThisFor() {
     <section className={styles.whoSection} id="who-is-this-for">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Who Is This Program For?</h2>
+          <h2 className="sectionTitle">Who Is This Program For?</h2>
         </div>
         
         <div className={styles.grid}>

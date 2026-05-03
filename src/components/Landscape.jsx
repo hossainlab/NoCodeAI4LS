@@ -42,7 +42,7 @@ export default function Landscape() {
     <section className={styles.landscapeSection} id="landscape">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>No Code AI Landscape</h2>
+          <h2 className="sectionTitle">No Code AI Landscape</h2>
         </div>
         
         <div className={styles.grid}>

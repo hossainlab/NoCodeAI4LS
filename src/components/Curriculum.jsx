@@ -47,7 +47,7 @@ export default function Curriculum() {
   return (
     <section className={styles.curriculum} id="curriculum">
       <div className="container">
-        <h2 className={styles.sectionTitle}>Curriculum</h2>
+        <h2 className="sectionTitle">Curriculum</h2>
         <div className={styles.timeline}>
           {weeks.map((week) => (
             <div key={week.week} className={styles.timelineItem}>

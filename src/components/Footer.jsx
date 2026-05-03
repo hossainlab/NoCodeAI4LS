@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.footerContent}`}>
         <div className={styles.brand}>
-          <Image src="/NoCodeAI4LS/logo.png" alt="Program Logo" width={50} height={50} className={styles.brandLogo} />
+          <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH}/logo.png`} alt="Program Logo" width={50} height={50} className={styles.brandLogo} />
           <div>
             <h3 className={styles.logoText}>No Code & Agentic AI</h3>
             <p className={styles.tagline}>Empowering Life Sciences</p>

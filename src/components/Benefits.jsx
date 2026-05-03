@@ -33,7 +33,7 @@ export default function Benefits() {
     <section className={styles.benefitsSection} id="benefits">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Program Benefits</h2>
+          <h2 className="sectionTitle">Program Benefits</h2>
         </div>
         <div className={styles.benefitsList}>
           {benefits.map((benefit, index) => (
