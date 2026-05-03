@@ -17,7 +17,7 @@ export default function Mentor() {
             <div className={styles.imageGlow}></div>
             <div className={styles.imageWrapper}>
               <Image 
-                src="/jubayer.jpg" 
+                src="/NoCodeAI4LS/jubayer.jpg"
                 alt="Md. Jubayer Hossain" 
                 width={400} 
                 height={500} 
