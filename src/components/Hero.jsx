@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './Hero.module.css';
+import ParticleCanvas from './ParticleCanvas';
 
 export default function Hero() {
   return (
@@ -21,7 +22,7 @@ export default function Hero() {
         <div className={styles.metaData}>
           <div className={styles.metaItem}>
             <strong>Duration</strong>
-            <span>4 Weeks Live</span>
+            <span>4 Weeks</span>
           </div>
           <div className={styles.metaItem}>
             <strong>Format</strong>
@@ -29,10 +30,15 @@ export default function Hero() {
           </div>
           <div className={styles.metaItem}>
             <strong>Audience</strong>
-            <span>Mixed (Undergrads to Professionals)</span>
+            <span>All Levels</span>
+          </div>
+          <div className={styles.metaItem}>
+            <strong>Language</strong>
+            <span>Bangla</span>
           </div>
         </div>
       </div>
+      <ParticleCanvas />
       <div className={styles.backgroundGlow}></div>
     </section>
   );

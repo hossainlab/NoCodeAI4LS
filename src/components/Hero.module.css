@@ -102,8 +102,26 @@
 @media (max-width: 768px) {
   .metaData {
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
     flex-direction: column;
     width: 100%;
+  }
+
+  .hero {
+    padding: 5rem 0 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .metaData {
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
   }
 }

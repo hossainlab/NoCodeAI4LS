@@ -140,12 +140,32 @@
 @media (max-width: 992px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 5rem;
+    gap: 3rem;
   }
-  
+
   .imageContainer {
     max-width: 400px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mentorSection {
+    padding: 4rem 0;
+  }
+
+  .grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentorSection {
+    padding: 3rem 0;
+  }
+
+  .statValue {
+    font-size: 1.6rem;
   }
 }
 

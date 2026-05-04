@@ -4,7 +4,7 @@ export default function Curriculum() {
   const weeks = [
     {
       week: 1,
-      title: "Foundations & Prompt Engineering",
+      title: "AI Foundations & Prompt Engineering",
       topics: [
         "No-Code Tools Setup & Foundations",
         "Agentic AI Landscape for Life Sciences",
@@ -14,11 +14,11 @@ export default function Curriculum() {
     },
     {
       week: 2,
-      title: "Literature Research & Omics Data",
+      title: "Literature Search, Review, and Synthesis & Omics Data",
       topics: [
         "Agentic Literature Research Review",
         "PubMed Monitor to Claude Summarizer",
-        "Omics Data Analysis — No Code Pipeline",
+        "Omics Data Analysis — No Code Pipeline (Bulk RNA-seq)",
         "scRNA-seq intro: Seurat/Scanpy workflow"
       ]
     },
