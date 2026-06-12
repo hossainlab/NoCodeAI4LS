@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session 07 — Deep Learning: Drug Discovery</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+  <style>
+    :root {
+      --db-primary:   #205E92;
+      --db-secondary: #64B5F6;
+      --db-dark:      #0a1628;
+      --db-accent:    #10b981;
+      --db-warning:   #f59e0b;
+      --db-danger:    #ef4444;
+      --db-white:     #ffffff;
+      --db-gray-50:   #f8fafc;
+      --db-gray-100:  #f1f5f9;
+      --db-gray-200:  #e2e8f0;
+      --db-gray-300:  #cbd5e1;
+      --db-gray-400:  #94a3b8;
+      --db-gray-500:  #64748b;
+      --db-gray-600:  #475569;
+      --db-gray-700:  #334155;
+      --db-gray-800:  #1e293b;
+      --db-gray-900:  #0f172a;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Outfit', 'Inter', sans-serif;
+    }
+
+    .reveal-viewport { background: #ffffff; }
+
+    .reveal {
+      font-family: var(--font-body);
+      font-size: 19px;
+      color: var(--db-gray-700);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      text-transform: none;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--db-gray-900);
+      margin: 0 0 0.3em 0;
+    }
+
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.65em; }
+    .reveal h3 { font-size: 1.15em; }
+
+    .reveal p {
+      line-height: 1.55;
+      color: var(--db-gray-500);
+      margin-bottom: 0.35em;
+    }
+
+    .reveal strong { color: var(--db-gray-800); font-weight: 700; }
+    .reveal a      { color: var(--db-primary); text-decoration: none; font-weight: 600; }
+
+    /* Slide container */
+    .reveal .slides > section {
+      padding: 1.6em 2.4em;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* ─── Persistent Footer ─── */
+    .db-footer {
+      position: fixed; bottom: 10px; left: 20px;
+      z-index: 100;
+      font-family: var(--font-body); font-size: 10px; font-weight: 500;
+      color: var(--db-gray-400); pointer-events: none;
+    }
+
+    .reveal .slide-number {
+      font-family: var(--font-body); font-size: 10px; font-weight: 600;
+      color: var(--db-gray-400); background: transparent;
+      right: 20px; bottom: 10px;
+    }
+
+    .reveal .progress { height: 3px; color: var(--db-primary); }
+
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block; padding: 0.25em 0.9em; border-radius: 999px;
+      font-size: 0.6em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--db-primary);
+      background: rgba(32,94,146,0.08); border: 1px solid rgba(32,94,146,0.15);
+      margin-bottom: 0.4em;
+    }
+    .tag-green { color: var(--db-accent);   background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); }
+    .tag-amber { color: var(--db-warning);  background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--db-primary), var(--db-secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .sep {
+      width: 44px; height: 3px;
+      background: linear-gradient(90deg, var(--db-primary), var(--db-secondary));
+      border-radius: 2px; margin: 0.5em auto;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--db-gray-50); border: 1px solid var(--db-gray-200);
+      border-radius: 10px; padding: 0.7em 0.9em; text-align: left;
+    }
+    .card-bordered {
+      background: var(--db-white); border: 1px solid var(--db-gray-200);
+      border-radius: 10px; padding: 0.7em 0.9em; text-align: left;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .card-highlight {
+      border-color: var(--db-primary);
+      box-shadow: 0 2px 10px rgba(32,94,146,0.1);
+    }
+    .card h4 {
+      font-size: 0.8em; margin: 0 0 0.25em 0; color: var(--db-gray-800);
+    }
+    .card p, .card-bordered p {
+      font-size: 0.72em; margin: 0; color: var(--db-gray-500); line-height: 1.5;
+    }
+
+    /* ── Grids ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr;         gap: 0.7em; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr;     gap: 0.6em; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr);   gap: 0.5em; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr;        gap: 1.2em; align-items: start; }
+
+    /* ── Lists ── */
+    .reveal ul { list-style: none; padding: 0; margin: 0; }
+    .reveal ul li {
+      padding: 0.22em 0 0.22em 1.4em; position: relative;
+      font-size: 0.82em; color: var(--db-gray-600); line-height: 1.5;
+    }
+    .reveal ul li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--db-primary); font-weight: 700;
+    }
+    .reveal .check-list li::before { content: "✓"; color: var(--db-accent); }
+    .reveal .no-bullets  li::before { content: none; }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 3px solid var(--db-primary); padding: 0.6em 1em;
+      background: var(--db-gray-50); border-radius: 0 8px 8px 0;
+      font-style: italic; color: var(--db-gray-600); font-size: 0.82em;
+    }
+
+    /* ── CTA Box ── */
+    .cta-box {
+      border: 2px solid var(--db-primary); border-radius: 14px;
+      padding: 1.2em 1.8em; background: rgba(32,94,146,0.03); text-align: center;
+    }
+
+    /* ── Code block ── */
+    .code-block {
+      background: var(--db-gray-900); color: #e2e8f0; border-radius: 8px;
+      padding: 0.8em 1em; font-family: 'Courier New', monospace; font-size: 0.68em;
+      text-align: left; line-height: 1.65; overflow: hidden;
+    }
+    .code-block .comment { color: #64748b; }
+    .code-block .keyword { color: #64B5F6; }
+    .code-block .string  { color: #10b981; }
+    .code-block .fn      { color: #f59e0b; }
+
+    /* ── Numbered step list ── */
+    .step-list { list-style: none; padding: 0; counter-reset: steps; }
+    .step-list li {
+      counter-increment: steps;
+      padding: 0.4em 0 0.4em 2.2em; position: relative;
+      font-size: 0.78em; color: var(--db-gray-600);
+      border-bottom: 1px solid var(--db-gray-100);
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-list li::before {
+      content: counter(steps);
+      position: absolute; left: 0; top: 0.35em;
+      width: 1.5em; height: 1.5em; border-radius: 50%;
+      background: var(--db-primary); color: white;
+      font-size: 0.72em; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 0.62em; font-weight: 700; color: var(--db-primary);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.35em;
+    }
+
+    .speaker-info { text-align: center; margin-top: 0.7em; }
+    .speaker-info .speaker-name  { font-size: 0.78em; font-weight: 600; color: var(--db-gray-700); }
+    .speaker-info .speaker-role  { font-size: 0.68em; color: var(--db-gray-400); }
+    .speaker-info .speaker-email { font-size: 0.64em; color: var(--db-primary); font-weight: 600; }
+
+    .disclaimer { font-size: 0.5em; color: var(--db-gray-400); margin-top: 0.8em; }
+
+    /* ── Social row ── */
+    .social-row { display: flex; align-items: center; justify-content: center; gap: 0.5em; margin-top: 0.4em; }
+    .social-row a, .social-row span { color: var(--db-gray-400); font-size: 0.68em; transition: color 0.2s; }
+    .social-row a:hover { color: var(--db-primary); }
+    .social-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--db-gray-300); display: inline-block; }
+
+    /* ── AI Evolution timeline ── */
+    .evo-track {
+      display: flex; align-items: flex-start; gap: 0;
+      margin-top: 1em; position: relative;
+    }
+    .evo-track::before {
+      content: ''; position: absolute; top: 24px; left: 48px; right: 48px; height: 2px;
+      background: linear-gradient(90deg, var(--db-gray-200), var(--db-primary));
+      border-radius: 2px; z-index: 0;
+    }
+    .evo-node {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      gap: 0.4em; position: relative; z-index: 1; padding: 0 0.3em;
+    }
+    .evo-dot {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3em; border: 2px solid var(--db-gray-200);
+      background: var(--db-white);
+    }
+    .evo-dot.active {
+      border-color: var(--db-primary);
+      box-shadow: 0 0 0 4px rgba(32,94,146,0.1);
+      background: rgba(32,94,146,0.06);
+    }
+    .evo-label { font-size: 0.72em; font-weight: 700; color: var(--db-gray-700); text-align: center; }
+    .evo-sub   { font-size: 0.62em; color: var(--db-gray-400); text-align: center; line-height: 1.4; }
+
+    @media print {
+      .reveal-viewport { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .reveal .slides section { page-break-after: always; page-break-inside: avoid; }
+      .db-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Persistent Footer ─── -->
+  <div class="db-footer">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.6;">
+      <path d="M4 4C4 4 7 6 12 12S20 20 20 20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20 4C20 4 17 6 12 12S4 20 4 20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6.5 6.5H4" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17.5 6.5H20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6.5 17.5H4" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17.5 17.5H20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 9H7.5" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M16.5 9H15" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 15H7.5" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M16.5 15H15" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ══ TITLE SLIDE ══════════════════════════════════════ -->
+      <section>
+        <div class="tag">Session 07 · No-Code &amp; Agentic AI for Life Sciences</div>
+        <h1 style="margin-top:0.2em;margin-bottom:0.1em;">Deep Learning <br><span class="gradient-text">in Drug Discovery</span></h1>
+        <p style="font-size:1em;color:var(--db-primary);font-weight:500;margin-bottom:0.3em;">Target ID · Compound Screening · AlphaFold · ADMET</p>
+        <div class="sep"></div>
+        <div class="speaker-info">
+          <div class="speaker-name">Md. Jubayer Hossain · Founder &amp; CEO</div>
+          <div class="speaker-role" style="margin-top:0.15em;">DeepBio Limited · DeepBio Academy</div>
+        </div>
+        <div class="social-row" style="margin-top:0.6em;">
+          <a href="https://mdjubayerhossain.com" style="font-weight:600;color:var(--db-primary);">mdjubayerhossain.com</a>
+          <span class="social-dot"></span>
+          <a href="https://github.com/hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.linkedin.com/in/hossainmj/" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.youtube.com/@hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+        <p class="disclaimer">No Code &amp; Agentic AI for Life Sciences · Session 07 · June 2026</p>
+      </section>
+
+      <!-- ══ DRUG DISCOVERY PIPELINE OVERVIEW ══════════════════ -->
+      <section>
+        <div class="tag">Pipeline Overview</div>
+        <h2 style="margin-top:0.2em;">ML in Drug Discovery <span class="gradient-text">Pipeline</span></h2>
+        <div class="evo-track" style="margin: 1.5em 0;">
+          <div class="evo-node">
+            <div class="evo-dot" style="font-size: 0.8em;">🎯</div>
+            <div class="evo-label">Target ID</div>
+            <div class="evo-sub">Disease-linked gene/protein.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot" style="font-size: 0.8em;">💊</div>
+            <div class="evo-label">Hit Gen</div>
+            <div class="evo-sub">Finding initial molecules.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot" style="font-size: 0.8em;">⚖️</div>
+            <div class="evo-label">Optimization</div>
+            <div class="evo-sub">Potency & Selectivity.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot active" style="font-size: 0.8em;">🧪</div>
+            <div class="evo-label">ADMET</div>
+            <div class="evo-sub">Safety & Pharmacology.</div>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1em;">
+          <div class="card card-highlight">
+            <h4>🚀 The AI Advantage</h4>
+            <p style="font-size: 0.72em;">Reduces time from 10 years to < 5 years. Shifts discovery from "Trial and Error" to <strong>"Predictive Design."</strong></p>
+          </div>
+          <div class="card">
+            <h4>📦 No-Code Stack</h4>
+            <p style="font-size: 0.72em;">Open Targets, ChEMBL, SwissADME, AlphaFold, and Agentic Workflows.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ TARGET IDENTIFICATION WITH OPEN TARGETS ═══════════ -->
+      <section>
+        <div class="tag">Target Discovery</div>
+        <h2 style="margin-top:0.2em;">Target Identification: <span class="gradient-text">Open Targets</span></h2>
+        <div class="two-col" style="margin-top:0.6em;">
+          <div>
+            <p style="font-size:0.8em;">Open Targets Platform integrates genetics, omics, and literature data to prioritize targets.</p>
+            <ul style="margin-top:0.4em; font-size: 0.75em;">
+              <li><strong>Association Score:</strong> Strength of evidence linking gene to disease.</li>
+              <li><strong>Tractability:</strong> Can this target be drugged with small molecules or antibodies?</li>
+              <li><strong>Safety:</strong> Known target-related toxicities.</li>
+            </ul>
+          </div>
+          <div class="card card-highlight">
+            <h4>💡 Use Case</h4>
+            <p style="font-size: 0.65em;">"Find all druggable kinases associated with Rheumatoid Arthritis with a genetics score > 0.5."</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ CHEMBL + CLAUDE FOR COMPOUND QUERIES ══════════════ -->
+      <section>
+        <div class="tag">Chemical Intelligence</div>
+        <h2 style="margin-top:0.2em;"><span class="gradient-text">ChEMBL + Claude</span> for Queries</h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">ChEMBL is the world's largest open bioactivity database. Agents act as the interface.</p>
+            <div class="code-block" style="margin-top:0.5em;">
+<span class="comment"># Agentic ChEMBL Query</span>
+<span class="keyword">Prompt:</span> "Search ChEMBL for molecules inhibiting EGFR. 
+1. Filter for IC50 < 10nM.
+2. Return a table with SMILES, Molecule Name, and logP.
+3. Highlight those that pass Lipinski's Rule of 5."
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🧪 SMILES Awareness</h4>
+              <p style="font-size: 0.65em;">Claude understands SMILES notation (e.g., <code>CN1C=NC2=C1C(=O)N(C(=O)N2C)C</code>) and can reason about functional groups.</p>
+            </div>
+            <div class="card">
+              <h4>🔍 Rapid Screening</h4>
+              <p style="font-size: 0.65em;">Instead of manual SQL, use natural language to find "leads" in seconds.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ MOLECULAR PROPERTY PREDICTION ════════════════════ -->
+      <section>
+        <div class="tag">Predictive Chem</div>
+        <h2 style="margin-top:0.2em;">Molecular <span class="gradient-text">Property Prediction</span></h2>
+        <div class="grid-2" style="margin-top:1em;">
+          <div class="card" style="border-top:3px solid var(--db-primary);">
+            <h4>🏗️ Quantitative Structure-Activity (QSAR)</h4>
+            <p style="font-size: 0.7em;">Predicting biological activity based on chemical structure features (fingerprints).</p>
+          </div>
+          <div class="card" style="border-top:3px solid var(--db-accent);">
+            <h4>🛠 No-Code Tool: DataWarrior</h4>
+            <p style="font-size: 0.7em;">Desktop app for visualizing chemical space and predicting druglikeness, mutagenicity, and toxicity.</p>
+          </div>
+        </div>
+        <div class="quote-block" style="margin-top: 1em;">
+          "Machine learning allows us to screen billions of virtual molecules without synthesizing a single one."
+        </div>
+      </section>
+
+      <!-- ══ DRUG REPURPOSING ══════════════════════════════════ -->
+      <section>
+        <div class="tag">Optimization</div>
+        <h2 style="margin-top:0.2em;">Drug <span class="gradient-text">Repurposing</span></h2>
+        <div class="two-col" style="margin-top:0.6em;">
+          <div>
+            <p style="font-size:0.8em;">AI finds "new tricks for old drugs." Faster route to clinical use since safety data exists.</p>
+            <ul style="margin-top:0.5em; font-size: 0.75em;">
+              <li><strong>Signature Matching:</strong> Finding drugs that reverse a disease's gene expression profile.</li>
+              <li><strong>Network Analysis:</strong> Identifying secondary targets for approved drugs.</li>
+              <li><strong>Side-Effect Analysis:</strong> Turning "side effects" into primary therapies.</li>
+            </ul>
+          </div>
+          <div class="card-bordered">
+            <h4>🌟 Success Story</h4>
+            <p style="font-size: 0.65em;">Sildenafil (Viagra): Originally for hypertension, repurposed for erectile dysfunction based on clinical observations.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ALPHAFOLD FOR TARGET STRUCTURE ═══════════════════ -->
+      <section>
+        <div class="tag">Structural Biology</div>
+        <h2 style="margin-top:0.2em;"><span class="gradient-text">AlphaFold</span> for Target Structure</h2>
+        <div class="two-col" style="margin-top:0.6em;">
+          <div>
+            <p style="font-size:0.8em;">DeepMind's AlphaFold has solved the 50-year-old "protein folding problem."</p>
+            <ul style="margin-top:0.5em; font-size: 0.75em;">
+              <li><strong>Atomic Resolution:</strong> Predicts 3D structure from amino acid sequence.</li>
+              <li><strong>Binding Site ID:</strong> Identify where a molecule can actually attach.</li>
+              <li><strong>Tractability:</strong> See if the protein has a "pocket" suitable for a drug.</li>
+            </ul>
+          </div>
+          <div class="card card-highlight" style="text-align: center;">
+            <div style="width: 100%; height: 120px; background: rgba(32,94,146,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative;">
+              <svg width="100" height="80" viewBox="0 0 100 80">
+                <path d="M10 40 C 30 10, 70 70, 90 40" stroke="var(--db-primary)" stroke-width="3" fill="none" />
+                <path d="M20 50 C 40 20, 60 80, 80 50" stroke="var(--db-accent)" stroke-width="2" fill="none" opacity="0.5" />
+              </svg>
+            </div>
+            <p style="font-size: 0.6em; margin-top: 0.5em;">Predicted structure ➜ Virtual Docking</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ADMET PROPERTY ANALYSIS ══════════════════════════ -->
+      <section>
+        <section>
+          <div class="tag">Pharmacology</div>
+          <h2 style="margin-top:0.2em;"><span class="gradient-text">ADMET</span> Property Analysis</h2>
+          <div class="grid-3" style="margin-top:0.8em;">
+            <div class="card">
+              <h4>💧 Absorption</h4>
+              <p style="font-size: 0.65em;">Solubility, Permeability (Caco-2), P-gp substrate.</p>
+            </div>
+            <div class="card">
+              <h4>📦 Distribution</h4>
+              <p style="font-size: 0.65em;">Plasma Protein Binding, BBB permeability.</p>
+            </div>
+            <div class="card">
+              <h4>🔄 Metabolism</h4>
+              <p style="font-size: 0.65em;">CYP450 inhibition/substrate (half-life).</p>
+            </div>
+            <div class="card">
+              <h4>🚽 Excretion</h4>
+              <p style="font-size: 0.65em;">Renal/Hepatic clearance paths.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-danger);">
+              <h4>☠️ Toxicity</h4>
+              <p style="font-size: 0.65em;">hERG inhibition, Ames mutagenicity, Hepatotoxicity.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ══ AGENTIC WORKFLOW: THE FULL LOOP ══════════════════ -->
+      <section>
+        <div class="tag">Agentic Orchestration</div>
+        <h2 style="margin-top:0.2em;">The <span class="gradient-text">Discovery Loop</span></h2>
+        <p style="font-size:0.75em;margin-bottom:0.6em;">Connecting the dots from gene to literature with a single agent directive.</p>
+        <div class="step-list">
+          <li><strong>Identify:</strong> Gene associated with Neurodegeneration (Open Targets).</li>
+          <li><strong>Structure:</strong> Predict protein structure (AlphaFold Database).</li>
+          <li><strong>Screen:</strong> Query ChEMBL for similar leads (Claude Agent).</li>
+          <li><strong>Refine:</strong> Predict ADMET profile (SwissADME / DataWarrior).</li>
+          <li><strong>Ground:</strong> Find latest literature validating the target-drug pair (PubMed).</li>
+        </div>
+      </section>
+
+      <!-- ══ SUMMARY ══════════════════════════════════════════ -->
+      <section>
+        <div class="tag-green tag">Summary</div>
+        <h2 style="margin-top:0.2em;">Session 07 <span class="gradient-text">Key Takeaways</span></h2>
+        <div class="grid-2" style="margin-top:0.8em;">
+          <ul class="check-list">
+            <li>AI transforms the "Hunt for the Needle" into "Needle Engineering."</li>
+            <li>Open Targets priorities targets using evidence scores.</li>
+            <li>Claude + ChEMBL provides a natural language drug search.</li>
+          </ul>
+          <ul class="check-list">
+            <li>AlphaFold provides the 3D map for virtual docking.</li>
+            <li>ADMET filters identify early if a drug will fail in clinical.</li>
+            <li>Agentic workflows link data across the entire discovery arc.</li>
+          </ul>
+        </div>
+        <div class="card-highlight card" style="margin-top:1em;text-align:center;">
+          <p><strong>Next Session:</strong> Biomedical Image Analysis — AI vs. Radiologist accuracy and custom vision models.</p>
+        </div>
+      </section>
+
+      <!-- ══ CLOSING ════════════════════════════════════════ -->
+      <section>
+        <div class="tag-amber tag">No Code &amp; Agentic AI for Life Sciences</div>
+        <h2 style="margin-top:0.3em;">Thank <span class="gradient-text">You</span></h2>
+        <div class="sep"></div>
+        <div class="cta-box" style="max-width:550px;margin:1em auto;">
+          <h3 style="font-size:0.95em;color:var(--db-gray-800);margin-top:0;">Get in Touch</h3>
+          <p style="font-size:0.75em;margin-bottom:0.3em;"><strong>Md. Jubayer Hossain</strong></p>
+          <p style="font-size:0.75em;margin-bottom:0;"><a href="https://bio.link/hossainlab">bio.link/hossainlab</a></p>
+        </div>
+        <div class="social-row" style="margin-top:1em;">
+          <a href="https://bio.link/deepbioltd" style="font-weight:600;color:var(--db-primary);">bio.link/deepbioltd</a>
+          <span class="social-dot"></span>
+          <a href="https://github.com/hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.linkedin.com/in/hossainmj/" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.youtube.com/@hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+        <p class="disclaimer">&copy; 2026 Md. Jubayer Hossain &middot; No Code &amp; Agentic AI for Life Sciences — Session 07</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      width: 1200,
+      height: 680,
+      margin: 0.06,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: true,
+      controls: false,
+      progress: true,
+      pdfSeparateFragments: false,
+      pdfMaxPagesPerSlide: 1,
+    });
+  </script>
+</body>
+</html>

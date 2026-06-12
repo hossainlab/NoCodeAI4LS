@@ -18,6 +18,54 @@ export default function Sessions() {
       description: "Mastering the art of structuring directives using the RTFC framework, managing context windows, and implementing the P-A-E-I workflow.",
       link: `${basePath}/session-02/index.html`,
       type: "Presentation"
+    },
+    {
+      id: "03",
+      title: "Agentic Literature Review",
+      date: "Session 03",
+      description: "Building autonomous systematic review pipelines using AI agents, PubMed monitors, and source-grounded synthesis with NotebookLM.",
+      link: `${basePath}/session-03/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "04",
+      title: "Omics Data Analysis: RNA-Seq",
+      date: "Session 04",
+      description: "No-code RNA-seq pipelines from raw reads to count matrices, followed by DESeq2 analysis and agentic interpretation of results.",
+      link: `${basePath}/session-04/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "05",
+      title: "Omics Data Analysis: scRNA-Seq",
+      date: "Session 05",
+      description: "Exploring cell-level resolution with Seurat and Scanpy, covering pre-processing, clustering, trajectory inference, and cell-cell communication.",
+      link: `${basePath}/session-05/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "06",
+      title: "Deep Learning: Prediction Methods",
+      date: "Session 06",
+      description: "Implementing biomarker classification models, understanding neural network intuition, and exploring responsible AI in clinical prediction.",
+      link: `${basePath}/session-06/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "07",
+      title: "Deep Learning: Drug Discovery",
+      date: "Session 07",
+      description: "Accelerating the discovery pipeline using Open Targets, ChEMBL, and AlphaFold structure prediction through agentic workflows.",
+      link: `${basePath}/session-07/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "08",
+      title: "Biomedical Image Analysis",
+      date: "Session 08",
+      description: "Mastering CNN intuition for medical imaging, exploring AI triage workflows in radiology, and analyzing the CheXNet breakthrough.",
+      link: `${basePath}/session-08/index.html`,
+      type: "Presentation"
     }
   ];
 
@@ -30,11 +78,11 @@ export default function Sessions() {
         <div className={styles.grid}>
           {sessions.map((session) => (
             <div key={session.id} className={`glass ${styles.card}`}>
-              <div className={styles.sessionType}>{session.type}</div>
-              <h3 className={styles.sessionTitle}>
-                <span className={styles.sessionId}>{session.id}</span>
-                {session.title}
-              </h3>
+              <div className={styles.cardHeader}>
+                <span className={styles.sessionId}>#{session.id}</span>
+                <span className={styles.sessionType}>{session.type}</span>
+              </div>
+              <h3 className={styles.sessionTitle}>{session.title}</h3>
               <p className={styles.description}>{session.description}</p>
               <div className={styles.footer}>
                 <span className={styles.date}>{session.date}</span>
