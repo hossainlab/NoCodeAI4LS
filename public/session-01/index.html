@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session 01 — No Code &amp; Agentic AI for Life Sciences</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+  <style>
+    :root {
+      --db-primary:   #205E92;
+      --db-secondary: #64B5F6;
+      --db-dark:      #0a1628;
+      --db-accent:    #10b981;
+      --db-warning:   #f59e0b;
+      --db-danger:    #ef4444;
+      --db-white:     #ffffff;
+      --db-gray-50:   #f8fafc;
+      --db-gray-100:  #f1f5f9;
+      --db-gray-200:  #e2e8f0;
+      --db-gray-300:  #cbd5e1;
+      --db-gray-400:  #94a3b8;
+      --db-gray-500:  #64748b;
+      --db-gray-600:  #475569;
+      --db-gray-700:  #334155;
+      --db-gray-800:  #1e293b;
+      --db-gray-900:  #0f172a;
+      --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Outfit', 'Inter', sans-serif;
+    }
+
+    .reveal-viewport { background: #ffffff; }
+
+    .reveal {
+      font-family: var(--font-body);
+      font-size: 19px;
+      color: var(--db-gray-700);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      text-transform: none;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--db-gray-900);
+      margin: 0 0 0.3em 0;
+    }
+
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.65em; }
+    .reveal h3 { font-size: 1.15em; }
+
+    .reveal p {
+      line-height: 1.55;
+      color: var(--db-gray-500);
+      margin-bottom: 0.35em;
+    }
+
+    .reveal strong { color: var(--db-gray-800); font-weight: 700; }
+    .reveal a      { color: var(--db-primary); text-decoration: none; font-weight: 600; }
+
+    /* Slide container */
+    .reveal .slides > section {
+      padding: 1.6em 2.4em;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* ─── Persistent Footer ─── */
+    .db-footer {
+      position: fixed; bottom: 10px; left: 20px;
+      z-index: 100;
+      font-family: var(--font-body); font-size: 10px; font-weight: 500;
+      color: var(--db-gray-400); pointer-events: none;
+    }
+
+    .reveal .slide-number {
+      font-family: var(--font-body); font-size: 10px; font-weight: 600;
+      color: var(--db-gray-400); background: transparent;
+      right: 20px; bottom: 10px;
+    }
+
+    .reveal .progress { height: 3px; color: var(--db-primary); }
+
+
+    /* ── Tags ── */
+    .tag {
+      display: inline-block; padding: 0.25em 0.9em; border-radius: 999px;
+      font-size: 0.6em; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--db-primary);
+      background: rgba(32,94,146,0.08); border: 1px solid rgba(32,94,146,0.15);
+      margin-bottom: 0.4em;
+    }
+    .tag-green { color: var(--db-accent);   background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); }
+    .tag-amber { color: var(--db-warning);  background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--db-primary), var(--db-secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .sep {
+      width: 44px; height: 3px;
+      background: linear-gradient(90deg, var(--db-primary), var(--db-secondary));
+      border-radius: 2px; margin: 0.5em auto;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--db-gray-50); border: 1px solid var(--db-gray-200);
+      border-radius: 10px; padding: 0.7em 0.9em; text-align: left;
+    }
+    .card-bordered {
+      background: var(--db-white); border: 1px solid var(--db-gray-200);
+      border-radius: 10px; padding: 0.7em 0.9em; text-align: left;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .card-highlight {
+      border-color: var(--db-primary);
+      box-shadow: 0 2px 10px rgba(32,94,146,0.1);
+    }
+    .card h4 {
+      font-size: 0.8em; margin: 0 0 0.25em 0; color: var(--db-gray-800);
+    }
+    .card p, .card-bordered p {
+      font-size: 0.72em; margin: 0; color: var(--db-gray-500); line-height: 1.5;
+    }
+
+    /* ── Grids ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr;         gap: 0.7em; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr;     gap: 0.6em; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr);   gap: 0.5em; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr;        gap: 1.2em; align-items: start; }
+
+    /* ── Stats ── */
+    .stat { text-align: center; padding: 0.5em; }
+    .stat-value { font-family: var(--font-heading); font-size: 2em; font-weight: 900; color: var(--db-primary); line-height: 1; }
+    .stat-label { font-size: 0.55em; color: var(--db-gray-400); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2em; }
+
+    /* ── Tables ── */
+    .reveal table { font-size: 0.7em; border-collapse: collapse; width: 100%; }
+    .reveal table th {
+      font-family: var(--font-heading); font-weight: 700; text-transform: uppercase;
+      font-size: 0.68em; letter-spacing: 0.08em; color: var(--db-gray-400);
+      padding: 0.5em 0.7em; border-bottom: 2px solid var(--db-gray-200); text-align: left;
+    }
+    .reveal table td { padding: 0.4em 0.7em; border-bottom: 1px solid var(--db-gray-100); color: var(--db-gray-600); }
+
+    /* ── Lists ── */
+    .reveal ul { list-style: none; padding: 0; margin: 0; }
+    .reveal ul li {
+      padding: 0.22em 0 0.22em 1.4em; position: relative;
+      font-size: 0.82em; color: var(--db-gray-600); line-height: 1.5;
+    }
+    .reveal ul li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--db-primary); font-weight: 700;
+    }
+    .reveal .check-list li::before { content: "✓"; color: var(--db-accent); }
+    .reveal .no-bullets  li::before { content: none; }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 3px solid var(--db-primary); padding: 0.6em 1em;
+      background: var(--db-gray-50); border-radius: 0 8px 8px 0;
+      font-style: italic; color: var(--db-gray-600); font-size: 0.82em;
+    }
+
+    /* ── CTA Box ── */
+    .cta-box {
+      border: 2px solid var(--db-primary); border-radius: 14px;
+      padding: 1.2em 1.8em; background: rgba(32,94,146,0.03); text-align: center;
+    }
+
+    /* ── Speaker ── */
+    .speaker-info { text-align: center; margin-top: 0.7em; }
+    .speaker-info .speaker-name  { font-size: 0.78em; font-weight: 600; color: var(--db-gray-700); }
+    .speaker-info .speaker-role  { font-size: 0.68em; color: var(--db-gray-400); }
+    .speaker-info .speaker-email { font-size: 0.64em; color: var(--db-primary); font-weight: 600; }
+
+    .disclaimer { font-size: 0.5em; color: var(--db-gray-400); margin-top: 0.8em; }
+
+    /* ── Social row ── */
+    .social-row { display: flex; align-items: center; justify-content: center; gap: 0.5em; margin-top: 0.4em; }
+    .social-row a, .social-row span { color: var(--db-gray-400); font-size: 0.68em; transition: color 0.2s; }
+    .social-row a:hover { color: var(--db-primary); }
+    .social-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--db-gray-300); display: inline-block; }
+
+    /* ── Dark slides ── */
+    .dark-slide h1, .dark-slide h2, .dark-slide h3, .dark-slide h4 { color: var(--db-white); }
+    .dark-slide p, .dark-slide li { color: var(--db-gray-400); }
+    .dark-slide .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+    .dark-slide .card h4 { color: var(--db-white); }
+    .dark-slide .card p  { color: var(--db-gray-400); }
+    .dark-slide .tag { background: rgba(32,94,146,0.2); border-color: rgba(100,181,246,0.3); color: var(--db-secondary); }
+
+    /* ── AI Evolution timeline ── */
+    .evo-track {
+      display: flex; align-items: flex-start; gap: 0;
+      margin-top: 1em; position: relative;
+    }
+    .evo-track::before {
+      content: ''; position: absolute; top: 24px; left: 48px; right: 48px; height: 2px;
+      background: linear-gradient(90deg, var(--db-gray-200), var(--db-primary));
+      border-radius: 2px; z-index: 0;
+    }
+    .evo-node {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      gap: 0.4em; position: relative; z-index: 1; padding: 0 0.3em;
+    }
+    .evo-dot {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3em; border: 2px solid var(--db-gray-200);
+      background: var(--db-white);
+    }
+    .evo-dot.active {
+      border-color: var(--db-primary);
+      box-shadow: 0 0 0 4px rgba(32,94,146,0.1);
+      background: rgba(32,94,146,0.06);
+    }
+    .evo-label { font-size: 0.72em; font-weight: 700; color: var(--db-gray-700); text-align: center; }
+    .evo-sub   { font-size: 0.62em; color: var(--db-gray-400); text-align: center; line-height: 1.4; }
+
+    /* ── Stack layers ── */
+    .stack-layer {
+      border-radius: 8px; padding: 0.55em 0.8em; margin-bottom: 0.35em;
+      display: flex; align-items: flex-start; gap: 0.7em;
+    }
+    .stack-icon  { font-size: 1.1em; flex-shrink: 0; padding-top: 0.1em; }
+    .stack-label { font-size: 0.75em; font-weight: 700; color: var(--db-gray-800); }
+    .stack-desc  { font-size: 0.62em; color: var(--db-gray-500); line-height: 1.4; margin-top: 0.1em; }
+
+    /* ── Code block ── */
+    .code-block {
+      background: var(--db-gray-900); color: #e2e8f0; border-radius: 8px;
+      padding: 0.8em 1em; font-family: 'Courier New', monospace; font-size: 0.68em;
+      text-align: left; line-height: 1.65; overflow: hidden;
+    }
+    .code-block .comment { color: #64748b; }
+    .code-block .keyword { color: #64B5F6; }
+    .code-block .string  { color: #10b981; }
+    .code-block .fn      { color: #f59e0b; }
+
+    /* ── Privacy split ── */
+    .privacy-local {
+      background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px; padding: 0.8em 1em;
+    }
+    .privacy-ext {
+      background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 10px; padding: 0.8em 1em;
+    }
+
+    /* ── Numbered step list ── */
+    .step-list { list-style: none; padding: 0; counter-reset: steps; }
+    .step-list li {
+      counter-increment: steps;
+      padding: 0.4em 0 0.4em 2.2em; position: relative;
+      font-size: 0.78em; color: var(--db-gray-600);
+      border-bottom: 1px solid var(--db-gray-100);
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-list li::before {
+      content: counter(steps);
+      position: absolute; left: 0; top: 0.35em;
+      width: 1.5em; height: 1.5em; border-radius: 50%;
+      background: var(--db-primary); color: white;
+      font-size: 0.72em; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 0.62em; font-weight: 700; color: var(--db-primary);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.35em;
+    }
+
+    @media print {
+      .reveal-viewport { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .reveal .slides section { page-break-after: always; page-break-inside: avoid; }
+      .db-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Persistent Footer ─── -->
+  <div class="db-footer">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.6;">
+      <path d="M4 4C4 4 7 6 12 12S20 20 20 20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20 4C20 4 17 6 12 12S4 20 4 20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6.5 6.5H4" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17.5 6.5H20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6.5 17.5H4" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M17.5 17.5H20" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 9H7.5" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M16.5 9H15" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 15H7.5" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+      <path d="M16.5 15H15" stroke="#205E92" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ══ 01 TITLE ══════════════════════════════════════════ -->
+      <section>
+        <div class="tag">Session 01 · No-Code &amp; Agentic AI for Life Sciences</div>
+        <h1 style="margin-top:0.2em;margin-bottom:0.1em;">No-Code Tools Setup<br><span class="gradient-text">+ Foundations</span></h1>
+        <p style="font-size:1em;color:var(--db-primary);font-weight:500;margin-bottom:0.3em;">Course overview · AI evolution · LLMs · Agentic stacks · Tool setup</p>
+        <div class="sep"></div>
+        <div class="speaker-info">
+          <div class="speaker-name">Md. Jubayer Hossain · Founder &amp; CEO</div>
+          <div class="speaker-role" style="margin-top:0.15em;">DeepBio Limited · DeepBio Academy</div>
+        </div>
+        <div class="social-row" style="margin-top:0.6em;">
+          <a href="https://mdjubayerhossain.com" style="font-weight:600;color:var(--db-primary);">mdjubayerhossain.com</a>
+          <span class="social-dot"></span>
+          <a href="https://github.com/hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.linkedin.com/in/hossainmj/" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.youtube.com/@hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+        <p class="disclaimer">No Code &amp; Agentic AI for Life Sciences · Session 01 · June 2026</p>
+      </section>
+
+      <!-- ══ 02 COURSE OVERVIEW ═════════════════════════════════ -->
+      <section>
+        <div class="tag">Course Overview</div>
+        <h2 style="margin-top:0.2em;">What This <span class="gradient-text">Course Is</span></h2>
+        <div class="two-col" style="margin-top:0.6em;">
+          <div>
+            <p style="font-size:0.82em;">Hands-on program for life scientists who want to use <strong>AI agents</strong> — without writing production code.</p>
+            <ul style="margin-top:0.5em;">
+              <li>No prior ML or coding required</li>
+              <li>Practical, reproducible research workflows</li>
+              <li>Tools used by researchers today</li>
+              <li>Privacy-first approach for sensitive data</li>
+              <li>Builds toward multi-step agentic pipelines</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5em;">
+            <div class="card card-highlight">
+              <h4>🎯 Who It's For</h4>
+              <p>Biologists, clinicians, bioinformaticians, and data managers automating research tasks with AI agents.</p>
+            </div>
+            <div class="card">
+              <h4>📦 What You'll Build</h4>
+              <p>Literature pipelines, data analysis workflows, scientific writing agents, custom skill-driven assistants.</p>
+            </div>
+            <div class="card">
+              <h4>🔒 Data Handling</h4>
+              <p>Local-first where possible. Clear guidance on what leaves your machine and when.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 03 AGENDA ══════════════════════════════════════════ -->
+      <section>
+        <div class="tag">Session 01</div>
+        <h2 style="margin-top:0.2em;">Today's <span class="gradient-text">Agenda</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p class="section-label">Part 1 — Concepts</p>
+            <ul>
+              <li>AI evolution: ML → Agentic AI</li>
+              <li>Agentic AI landscape for life sciences</li>
+              <li>How LLMs work in practice</li>
+              <li>Agent-provider-model stack</li>
+              <li>Chat vs coding agents vs pipelines</li>
+              <li>Introduction to skills</li>
+              <li>Capabilities, limitations &amp; failure modes</li>
+              <li>Data privacy: local vs external</li>
+            </ul>
+          </div>
+          <div>
+            <p class="section-label" style="color:var(--db-accent);">Part 2 — Setup &amp; Practice</p>
+            <ul>
+              <li>VS Code / Claude Code / OpenCode setup</li>
+              <li>Install Scientific Agent Skills</li>
+              <li>Install Claude Scientific Writer Skills</li>
+              <li>Caveman setup for token management</li>
+              <li>First interaction exercise</li>
+              <li>Tool comparison exercise</li>
+            </ul>
+            <div class="card" style="margin-top:0.6em;border-top:2px solid var(--db-accent);">
+              <h4 style="color:var(--db-accent);">⏱ Duration</h4>
+              <p>~3 hours with 15-min break · 50% hands-on</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 04 DARK DIVIDER — AI EVOLUTION ════════════════════ -->
+      <section data-background-color="#0a1628" class="dark-slide">
+        <div class="tag">Section 01</div>
+        <h2 style="margin-top:0.3em;font-size:2.2em;">The AI <span class="gradient-text">Evolution</span></h2>
+        <p style="font-size:0.85em;">From statistical models to autonomous agents — knowing the arc helps you pick the right tool.</p>
+        <div class="sep"></div>
+      </section>
+
+      <!-- ══ 05 AI EVOLUTION TIMELINE ══════════════════════════ -->
+      <section>
+        <div class="tag">AI Evolution</div>
+        <h2 style="margin-top:0.2em;">ML → DL → GenAI → <span class="gradient-text">Agentic AI</span></h2>
+        <div class="evo-track">
+          <div class="evo-node">
+            <div class="evo-dot">📈</div>
+            <div class="evo-label">Machine Learning</div>
+            <div class="evo-sub">Pattern recognition from labeled data. Rules learned, not written.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot">🧠</div>
+            <div class="evo-label">Deep Learning</div>
+            <div class="evo-sub">Neural networks at scale. Image, speech, sequence tasks.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot">✨</div>
+            <div class="evo-label">Generative AI</div>
+            <div class="evo-sub">Models that create: text, images, code, protein structures.</div>
+          </div>
+          <div class="evo-node">
+            <div class="evo-dot active">🤖</div>
+            <div class="evo-label" style="color:var(--db-primary);">Agentic AI</div>
+            <div class="evo-sub" style="color:var(--db-primary);">Plans, uses tools, completes multi-step tasks autonomously.</div>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:1em;">
+          <div class="quote-block">
+            "The shift from GenAI to Agentic AI is the shift from answering questions to completing tasks."
+          </div>
+          <div class="card card-highlight">
+            <h4>Why It Matters for Life Sciences</h4>
+            <p>Agents can search literature, run analyses, write reports, and iterate — all from a single instruction.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 06 AGENTIC AI LANDSCAPE ════════════════════════════ -->
+      <section>
+        <div class="tag">Agentic AI Landscape</div>
+        <h2 style="margin-top:0.2em;">Agents in <span class="gradient-text">Life Sciences</span></h2>
+        <div class="grid-3" style="margin-top:0.6em;">
+          <div class="card" style="border-top:2px solid var(--db-primary);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">📚</div>
+            <h4>Literature &amp; Discovery</h4>
+            <p>PubMed pipelines, hypothesis generation, systematic review automation, citation management.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-accent);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">🧬</div>
+            <h4>Omics &amp; Analysis</h4>
+            <p>RNA-seq workflows, genomic annotation, pathway analysis, structure prediction, variant interpretation.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-secondary);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">📝</div>
+            <h4>Scientific Writing</h4>
+            <p>Manuscript drafting, abstract generation, methods rewriting, grant narrative assistance.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-warning);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">🔬</div>
+            <h4>Lab &amp; Protocols</h4>
+            <p>Protocol optimization, reagent lookup, lab notebook automation, experimental design.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-danger);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">🏥</div>
+            <h4>Clinical &amp; Regulatory</h4>
+            <p>Trial matching, adverse event summarization, regulatory document drafting, ICD coding.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-gray-400);">
+            <div style="font-size:1.3em;margin-bottom:0.2em;">📊</div>
+            <h4>Data &amp; Visualization</h4>
+            <p>EDA automation, figure generation, statistical reporting, dashboard creation.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 07 DARK DIVIDER — UNDERSTANDING LLMS ══════════════ -->
+      <section data-background-color="#0a1628" class="dark-slide">
+        <div class="tag">Section 02</div>
+        <h2 style="margin-top:0.3em;font-size:2.2em;">Understanding <span class="gradient-text">LLMs</span></h2>
+        <p style="font-size:0.85em;">What large language models are, how they generate text, and what that means in practice.</p>
+        <div class="sep"></div>
+      </section>
+
+      <!-- ══ 08 WHAT ARE LLMs ═══════════════════════════════════ -->
+      <section>
+        <div class="tag">LLMs</div>
+        <h2 style="margin-top:0.2em;">What LLMs Are &amp; <span class="gradient-text">How They Work</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">LLMs are <strong>next-token predictors</strong> trained on massive text corpora. They learn statistical relationships between words, concepts, and reasoning patterns.</p>
+            <ul style="margin-top:0.5em;">
+              <li>Trained on trillions of tokens of text</li>
+              <li>Generate responses token-by-token</li>
+              <li>No memory between sessions by default</li>
+              <li>Context window = working memory</li>
+              <li>Temperature controls randomness</li>
+              <li>System prompts shape behavior</li>
+            </ul>
+            <div class="code-block" style="margin-top:0.7em;">
+<span class="comment"># What the model actually does</span>
+<span class="keyword">input</span>:  <span class="string">"The protein folds into a..."</span>
+<span class="keyword">model</span>:  P(next_token | all_prior_tokens)
+<span class="keyword">output</span>: <span class="string">"stable beta-sheet conformation"</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5em;">
+            <div class="card card-highlight">
+              <h4>Context Window</h4>
+              <p>Everything the model can "see" at once — your prompt, conversation history, pasted documents. Measured in tokens (~¾ of a word).</p>
+            </div>
+            <div class="card">
+              <h4>Hallucination</h4>
+              <p>LLMs generate plausible-sounding text, not verified facts. Always cross-check citations, gene names, drug interactions, and statistics.</p>
+            </div>
+            <div class="card">
+              <h4>For Science: Rule of Thumb</h4>
+              <p>Use LLMs for reasoning, synthesis, writing. Use databases (PubMed, UniProt, PDB) for ground-truth facts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 09 AGENT–PROVIDER–MODEL STACK ════════════════════ -->
+      <section>
+        <div class="tag">Architecture</div>
+        <h2 style="margin-top:0.2em;">The Agent–Provider–<span class="gradient-text">Model Stack</span></h2>
+        <p style="font-size:0.78em;margin-bottom:0.6em;">Three distinct layers — swappable independently. Understanding them controls costs and privacy.</p>
+        <div class="two-col">
+          <div>
+            <div class="stack-layer" style="background:rgba(32,94,146,0.08);border:2px solid var(--db-primary);">
+              <div class="stack-icon">🤖</div>
+              <div>
+                <div class="stack-label">Agent / Interface</div>
+                <div class="stack-desc">Tool you interact with. Sends prompts, receives responses, executes actions.<br><em>Claude Code, VS Code Copilot, OpenCode, Cursor</em></div>
+              </div>
+            </div>
+            <div style="text-align:center;color:var(--db-gray-300);font-size:1.2em;margin:0.1em 0;">↕</div>
+            <div class="stack-layer" style="background:rgba(100,181,246,0.07);border:1px solid var(--db-secondary);">
+              <div class="stack-icon">🔌</div>
+              <div>
+                <div class="stack-label">API Provider</div>
+                <div class="stack-desc">Routes requests to models. Handles auth, rate limits, billing.<br><em>Anthropic API, OpenRouter, OpenAI API, Azure AI</em></div>
+              </div>
+            </div>
+            <div style="text-align:center;color:var(--db-gray-300);font-size:1.2em;margin:0.1em 0;">↕</div>
+            <div class="stack-layer" style="background:rgba(16,185,129,0.06);border:1px solid var(--db-accent);">
+              <div class="stack-icon">🧠</div>
+              <div>
+                <div class="stack-label">Model</div>
+                <div class="stack-desc">Neural network doing the work. Different sizes, costs, capabilities.<br><em>Claude Sonnet 4.6, GPT-4o, Gemini 2.5 Pro, Llama 3</em></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5em;">
+            <div class="card card-highlight">
+              <h4>Why This Matters</h4>
+              <p>One agent, multiple models via different providers. OpenCode + OpenRouter routes to Claude, GPT, or Gemini from one interface.</p>
+            </div>
+            <div class="card">
+              <h4>Cost Control</h4>
+              <p>Frontier models (Opus, GPT-4o) for complex reasoning. Fast cheap models (Haiku, GPT-4o-mini) for simple tasks. Same agent, different model.</p>
+            </div>
+            <div class="card">
+              <h4>Privacy Implication</h4>
+              <p>Data travels to provider's servers on every API call. Local models (Ollama) keep everything on-machine.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 10 TYPES OF AI SYSTEMS ════════════════════════════ -->
+      <section>
+        <div class="tag">System Types</div>
+        <h2 style="margin-top:0.2em;">Chat vs Coding Agents vs <span class="gradient-text">Agentic Pipelines</span></h2>
+        <div class="grid-3" style="margin-top:0.6em;">
+          <div class="card" style="border-top:2px solid var(--db-secondary);">
+            <div style="font-size:1.3em;margin-bottom:0.3em;">💬</div>
+            <h4>Chat Assistants</h4>
+            <p>Single-turn or conversational. You ask, it answers. No tool use or file access by default.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;"><strong>e.g.</strong> Claude.ai, ChatGPT, Gemini</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);"><strong>Best for:</strong> Q&amp;A, drafting, brainstorming</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-primary);">
+            <div style="font-size:1.3em;margin-bottom:0.3em;">⌨️</div>
+            <h4>Coding Agents</h4>
+            <p>Read &amp; edit files, run commands, use tools. Operate within a project context.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;"><strong>e.g.</strong> Claude Code, GitHub Copilot, Cursor</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);"><strong>Best for:</strong> Analysis scripts, data workflows</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-accent);">
+            <div style="font-size:1.3em;margin-bottom:0.3em;">⚙️</div>
+            <h4>Multi-step Agentic</h4>
+            <p>Agents calling agents. Plan → execute → evaluate → iterate. Minimal human-in-the-loop.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;"><strong>e.g.</strong> Claude Code + skills, custom pipelines</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);"><strong>Best for:</strong> Full research workflows</p>
+          </div>
+        </div>
+        <div class="card card-highlight" style="margin-top:0.7em;text-align:center;padding:0.6em 1em;">
+          <p style="margin:0;font-size:0.8em;color:var(--db-gray-700);">This course focuses on <strong>coding agents</strong> and building toward <strong>multi-step agentic systems</strong> for life science research.</p>
+        </div>
+      </section>
+
+      <!-- ══ 11 INTRODUCTION TO SKILLS ═════════════════════════ -->
+      <section>
+        <div class="tag">Skills</div>
+        <h2 style="margin-top:0.2em;">Introduction to <span class="gradient-text">Skills</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">A <strong>skill</strong> is a reusable instruction set that teaches an agent how to do a specific task well — like a detailed SOP loaded into the agent's context.</p>
+            <ul style="margin-top:0.4em;">
+              <li>Plain-text files (.md) with structured instructions</li>
+              <li>Invoked with a slash command: <code style="background:var(--db-gray-100);padding:0.1em 0.3em;border-radius:3px;">/pubmed-search</code></li>
+              <li>Can call external APIs and databases</li>
+              <li>Composable — one skill can invoke another</li>
+              <li>Community-maintained and shareable</li>
+            </ul>
+            <div class="code-block" style="margin-top:0.7em;">
+<span class="comment"># Invoke a skill</span>
+<span class="fn">/pubmed-database</span> <span class="string">"CRISPR off-target 2024"</span>
+
+<span class="comment"># Chain skills together</span>
+<span class="fn">/literature-review</span> <span class="string">"mRNA vaccines"</span>
+<span class="fn">/scientific-writing</span> <span class="string">methods section</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5em;">
+            <div class="card" style="border-top:2px solid var(--db-accent);">
+              <h4>🧪 Scientific Agent Skills</h4>
+              <p><strong>144 skills · 18 domains · 100+ databases.</strong> Bioinformatics, drug discovery, clinical research, lab automation, scientific writing. 27.9k ⭐ · 160k+ scientists.<br>
+              <span style="font-size:0.9em;color:var(--db-primary);">K-Dense-AI/scientific-agent-skills</span></p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-primary);">
+              <h4>✍️ Scientific Writer Skills</h4>
+              <p>Manuscript drafting, abstract writing, methods rewriting, figure legends, peer review responses. Included in Scientific Agent Skills.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-warning);">
+              <h4>🪨 Caveman Skills</h4>
+              <p>Token management — avg <strong>65% output reduction</strong>, 100% technical accuracy. Separate install.<br>
+              <span style="font-size:0.9em;color:var(--db-primary);">juliusbrussee/caveman</span></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 12 SECTION TITLE: STRATEGIC FRAMEWORKS ════════════ -->
+      <section data-background-color="#0a1628" class="dark-slide">
+        <div class="tag">Section 03</div>
+        <h2 style="margin-top:0.3em;font-size:2.2em;">Strategic <span class="gradient-text">Frameworks</span></h2>
+        <p style="font-size:0.85em;">Bridging the gap between knowing the tools and using them safely, accurately, and affordably.</p>
+        <div class="sep"></div>
+      </section>
+
+      <!-- ══ 13 CAPABILITIES & LIMITATIONS ════════════════════ -->
+      <section>
+        <div class="tag">Critical Thinking</div>
+        <h2 style="margin-top:0.2em;">Capabilities, Limitations &amp; <span class="gradient-text">Failure Modes</span></h2>
+        <div class="grid-3" style="margin-top:0.6em;">
+          <div>
+            <p class="section-label" style="color:var(--db-accent);">✓ Strong At</p>
+            <ul class="check-list">
+              <li>Synthesizing large text volumes</li>
+              <li>Structured writing and editing</li>
+              <li>Code generation &amp; debugging</li>
+              <li>Explaining complex concepts</li>
+              <li>Brainstorming hypotheses</li>
+              <li>Following detailed instructions</li>
+            </ul>
+          </div>
+          <div>
+            <p class="section-label" style="color:var(--db-warning);">⚠ Unreliable For</p>
+            <ul>
+              <li>Specific citations (hallucinated DOIs)</li>
+              <li>Real-time data (cutoff: Aug 2025)</li>
+              <li>Precise numerical calculations</li>
+              <li>Novel experimental design alone</li>
+              <li>Regulatory / legal conclusions</li>
+              <li>Rare disease edge cases</li>
+            </ul>
+          </div>
+          <div>
+            <p class="section-label" style="color:var(--db-danger);">✗ Known Failure Modes</p>
+            <ul>
+              <li>Confident hallucination of facts</li>
+              <li>Sycophancy (agreeing too readily)</li>
+              <li>Context window overflow / drift</li>
+              <li>Instruction degradation over long sessions</li>
+              <li>Prompt injection via pasted text</li>
+              <li>Inconsistency across sessions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote-block" style="margin-top:0.8em;">
+          "Treat LLM output as a first draft from a well-read but sometimes overconfident assistant. Always verify against primary sources."
+        </div>
+      </section>
+
+      <!-- ══ 14 VERIFICATION & GROUND TRUTH ═══════════════════ -->
+      <section>
+        <div class="tag">Trust but Verify</div>
+        <h2 style="margin-top:0.2em;">Verification &amp; <span class="gradient-text">Ground Truth</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">Agents execute code and synthesis, but the scientist provides the <strong>Audit</strong>. Never accept an agentic result without a validation step.</p>
+            <p class="section-label">The "Agent Auditing" Workflow</p>
+            <ul style="margin-top:0.3em;font-size:0.75em;">
+              <li><strong>Show Your Work:</strong> Require the agent to print intermediate dataframes or logs.</li>
+              <li><strong>Source Triangulation:</strong> Cross-check agent summaries against primary PDFs or PubMed DOIs.</li>
+              <li><strong>Reasoning Trace:</strong> Ask: <em>"Explain the logic used to prioritize these 5 genes."</em></li>
+              <li><strong>Null Hypothesis Test:</strong> Ask the agent to find evidence <em>against</em> its own conclusion.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🔍 The "Code Review" Rule</h4>
+              <p>When an agent writes a script (e.g., for RNA-seq), read the generated code before execution. Check for hardcoded assumptions or incorrect library versions.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-danger);">
+              <h4>🚫 The Hallucination Trap</h4>
+              <p>Agents are most likely to hallucinate when forced to provide a specific fact they don't have. Use <strong>grounded search tools</strong> (PubMed/UniProt) to fix this.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 15 DATA PRIVACY ════════════════════════════════════ -->
+      <section>
+        <div class="tag">Privacy</div>
+        <h2 style="margin-top:0.2em;">Data Privacy: Local vs <span class="gradient-text">External</span></h2>
+        <div class="two-col" style="margin-top:0.6em;">
+          <div class="privacy-local">
+            <p class="section-label" style="color:var(--db-accent);">🟢 Stays Local</p>
+            <ul class="check-list">
+              <li>Files on filesystem (not pasted in)</li>
+              <li>Local model inference (Ollama, LM Studio)</li>
+              <li>Conversation history in CLI (local DB)</li>
+              <li>Code run in terminal / sandbox</li>
+            </ul>
+          </div>
+          <div class="privacy-ext">
+            <p class="section-label" style="color:var(--db-warning);">🟡 Sent Externally</p>
+            <ul>
+              <li>Any text in your prompt / message</li>
+              <li>Files you paste or attach to context</li>
+              <li>Tool call inputs &amp; outputs (via API)</li>
+              <li>Web fetch results within agent context</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:0.6em;">
+          <div class="card card-highlight">
+            <h4>🏥 Clinical / Patient Data</h4>
+            <p>Never paste identifiable patient data into any cloud-API-backed agent. Use de-identified summaries or local models only.</p>
+          </div>
+          <div class="card">
+            <h4>📋 Check Provider Policies</h4>
+            <p>Anthropic API &amp; Claude Code: data not used for training by default. Verify with your institution's data governance team.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 16 FRAMING SCIENTIFIC QUERIES ════════════════════ -->
+      <section>
+        <div class="tag">Prompt Engineering</div>
+        <h2 style="margin-top:0.2em;">Framing <span class="gradient-text">Scientific Queries</span></h2>
+        <p style="font-size:0.75em;margin-bottom:0.5em;">Moving from "Chat" to "Directive." Better framing leads to higher-fidelity scientific reasoning.</p>
+        <div class="two-col">
+          <div>
+            <p class="section-label">The C-T-C Framework</p>
+            <div class="card-bordered" style="margin-bottom:0.5em;">
+              <h4 style="font-size:0.75em;margin-bottom:0.1em;">1. Context (The Persona)</h4>
+              <p style="font-size:0.65em;"><em>"Act as a senior computational biologist specialized in single-cell transcriptomics."</em></p>
+            </div>
+            <div class="card-bordered" style="margin-bottom:0.5em;">
+              <h4 style="font-size:0.75em;margin-bottom:0.1em;">2. Task (The Directive)</h4>
+              <p style="font-size:0.65em;"><em>"Evaluate the off-target profile of this gRNA sequence against the human GRCh38 genome."</em></p>
+            </div>
+            <div class="card-bordered">
+              <h4 style="font-size:0.75em;margin-bottom:0.1em;">3. Constraints (The Guardrails)</h4>
+              <p style="font-size:0.65em;"><em>"Prioritize results with < 3 mismatches. Format as a table with Ensembl IDs and citations."</em></p>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="quote-block">
+              "The quality of the output is determined by the clarity of the constraints, not just the complexity of the task."
+            </div>
+            <div class="card card-highlight">
+              <h4>💡 Pro Tip: Multi-Shot</h4>
+              <p>Give the agent 1-2 examples of the output you expect (e.g., a specific table format). This reduces trial-and-error costs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 17 BUDGETING & TOKEN LITERACY ══════════════════ -->
+      <section>
+        <div class="tag">Financial Literacy</div>
+        <h2 style="margin-top:0.2em;">Budgeting Your <span class="gradient-text">AI Assistant</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">Professional agents use <strong>Pay-Per-Token</strong> billing. Inefficient use can lead to "Bill Shock."</p>
+            <p class="section-label">Cost-Saving Strategies</p>
+            <ul style="margin-top:0.3em;font-size:0.75em;">
+              <li><strong>Caveman Mode:</strong> Use <code>/caveman full</code> to save ~65% on output tokens.</li>
+              <li><strong>Context Management:</strong> Use <code>/forget</code> or start new sessions to clear "heavy" history.</li>
+              <li><strong>Billing Alerts:</strong> Set a $10 hard limit in the Anthropic/Google console.</li>
+              <li><strong>Model Tiering:</strong> Use "Flash" or "Haiku" models for simple tasks; save "Pro" or "Opus" for complex reasoning.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card" style="border-top:2px solid var(--db-warning);">
+              <h4>💰 Typical Costs</h4>
+              <p>A full hour of agentic research usually costs <strong>$0.50 – $2.00</strong>. Writing a single paper draft may cost <strong>$5.00 – $15.00</strong> depending on model tier.</p>
+            </div>
+            <div class="card card-highlight">
+              <h4>🛡️ Safety First</h4>
+              <p>Never hardcode API keys. Use <strong>Environment Variables</strong> (<code>.env</code>) and ensure they are in your <code>.gitignore</code>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 18 SECTION TITLE: AI TOOLSET LANDSCAPE ══════════════ -->
+      <section data-background-color="#0a1628" class="dark-slide">
+        <div class="tag">Section 04</div>
+        <h2 style="margin-top:0.3em;font-size:2.2em;">The AI Toolset <span class="gradient-text">Landscape</span></h2>
+        <p style="font-size:0.85em;">A deep dive into the agents, environments, and scientific ecosystems used in this course.</p>
+        <div class="sep"></div>
+      </section>
+
+      <!-- ══ 19 CLAUDE CODE (ANTHROPIC) ════════════════════════ -->
+      <section>
+        <div class="tag">Agentic CLI</div>
+        <h2 style="margin-top:0.2em;">Claude <span class="gradient-text">Code</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">Anthropic's "coding partner" that reasons across codebases, runs terminal commands, and manages complex multi-file tasks.</p>
+            <p class="section-label">Core Workflow (Reason & Act)</p>
+            <ul style="margin-top:0.3em;">
+              <li><strong>Multi-File Reasoning:</strong> Maps directory structures and identifies cross-module dependencies.</li>
+              <li><strong>Tool Execution:</strong> Natively runs <code>git</code>, <code>npm</code>, <code>pytest</code>, and custom bash scripts.</li>
+              <li><strong>Iterative Debugging:</strong> Edits code → runs tests → reads logs → fixes until green.</li>
+              <li><strong>Checkpointing:</strong> Automatic state saves with <code>/rewind</code> to undo complex refactors.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🛡️ Model Context Protocol (MCP)</h4>
+              <p>Connects Claude to GitHub, Linear, Slack, and production databases to bring real-world context into the agent session.</p>
+            </div>
+            <div class="card">
+              <h4>⚡ Parallel Sessions</h4>
+              <p>Supports <strong>git worktrees</strong> to handle a refactor, a feature, and a bug fix simultaneously in isolated environments.</p>
+            </div>
+            <div class="card">
+              <h4>🎯 Recommended For</h4>
+              <p>Developing bioinformatics pipelines, refactoring analysis scripts, and complex data migrations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 20 GEMINI CLI (GOOGLE) ════════════════════════════ -->
+      <section>
+        <div class="tag">Agentic CLI</div>
+        <h2 style="margin-top:0.2em;">Gemini <span class="gradient-text">CLI</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">An open-source agent built on Gemini 2.5 Pro specialized in <strong>grounded research</strong> and surgical code edits.</p>
+            <p class="section-label">Agent Life Cycle</p>
+            <ul style="margin-top:0.3em;">
+              <li><strong>Research:</strong> Uses <code>google_web_search</code> and <code>web_fetch</code> to consult latest documentation.</li>
+              <li><strong>Plan Mode:</strong> Dedicated read-only mode (<code>/plan</code>) for safe architectural design before writing.</li>
+              <li><strong>Act (Surgical):</strong> High-precision <code>replace</code> tool for minimal diffs and efficient token usage.</li>
+              <li><strong>Validate:</strong> Automated check-ins against project-specific <code>GEMINI.md</code> mandates.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🏗️ Hierarchical Memory</h4>
+              <p>Uses <code>GEMINI.md</code> at global, project, and folder levels to maintain persistent style and architecture rules.</p>
+            </div>
+            <div class="card">
+              <h4>🌐 Multimodal Support</h4>
+              <p>Can "see" images and screenshots (<code>Ctrl+V</code>) to debug frontends or interpret scientific charts.</p>
+            </div>
+            <div class="card">
+              <h4>🎯 Recommended For</h4>
+              <p>Grounding research in latest papers, medical imaging analysis, and large-context codebase mapping.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 21 CO-SCIENTIST (GOOGLE DEEPMIND) ════════════════ -->
+      <section>
+        <div class="tag">Scientific Multi-Agent</div>
+        <h2 style="margin-top:0.2em;">Co-Scientist <span class="gradient-text">(DeepMind)</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">A multi-agent system designed to propose, debate, and refine <strong>novel scientific hypotheses</strong>.</p>
+            <p class="section-label">The "Tournament of Ideas" Workflow</p>
+            <ul style="margin-top:0.3em;font-size:0.75em;">
+              <li><strong>Generation:</strong> Supervisor agent coordinates specialized agents to propose focus areas.</li>
+              <li><strong>Debate:</strong> Reflection agent acts as virtual peer reviewer, ranking ideas in an <strong>Elo-based tournament</strong>.</li>
+              <li><strong>Evolution:</strong> Top-ranked hypotheses are iteratively refined and combined for robustness.</li>
+              <li><strong>Synthesis:</strong> Meta-review agent generates a comprehensive research overview.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🔬 Real-World Success</h4>
+              <p>Replicated <strong>10 years</strong> of antimicrobial resistance research in <strong>48 hours</strong>.</p>
+            </div>
+            <div class="card">
+              <h4>🔗 Tool Chaining</h4>
+              <p>Natively invokes <strong>AlphaFold</strong> for structure prediction and <strong>UniProt</strong> for sequence analysis.</p>
+            </div>
+            <div class="card">
+              <h4>🎯 Recommended For</h4>
+              <p>Hypothesis generation, antimicrobial discovery, and drug repurposing research.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 22 BIOMNI (STANFORD UNIVERSITY) ══════════════════ -->
+      <section>
+        <div class="tag">Biomedical Agent</div>
+        <h2 style="margin-top:0.2em;">Biomni <span class="gradient-text">(Stanford)</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">A "virtual AI biologist" capable of autonomously executing tasks across 25 biomedical subfields.</p>
+            <p class="section-label">Architecture: E1 (Env) + A1 (Agent)</p>
+            <ul style="margin-top:0.3em;font-size:0.75em;">
+              <li><strong>Unified Action Space:</strong> Integrated with 150 tools, 105 software packages, and 59 databases.</li>
+              <li><strong>CodeAct:</strong> Uses Python code as the universal interface for tool invocation and statistical analysis.</li>
+              <li><strong>Judge/Actor Loop:</strong> A "Judge" LLM verifies every step to prevent confabulation (hallucination).</li>
+              <li><strong>Performance:</strong> Achieved <strong>74.4%</strong> on LAB-Bench, rivaling human expert performance.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🧪 Know-How Library</h4>
+              <p>Retrieves 10-step experimental protocols (e.g., molecular cloning) rated at senior-scientist level.</p>
+            </div>
+            <div class="card">
+              <h4>🧬 Clinical Reasoning</h4>
+              <p>Specialized in GWAS interpretation, causal gene prioritization, and rare disease diagnosis.</p>
+            </div>
+            <div class="card">
+              <h4>🎯 Recommended For</h4>
+              <p>Experimental protocol design, clinical genomics, and causal inference in biology.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 23 K-DENSE.AI ECOSYSTEM ══════════════════════════ -->
+      <section>
+        <div class="tag">Scientific Ecosystem</div>
+        <h2 style="margin-top:0.2em;">K-Dense.ai <span class="gradient-text">Ecosystem</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">The foundational framework powering the <strong>Scientific Agent Skills</strong> used throughout this course.</p>
+            <p class="section-label">Core Components</p>
+            <ul style="margin-top:0.3em;font-size:0.75em;">
+              <li><strong>Skills Library:</strong> 144+ composable skills covering 18 domains (Omics, Chem, Clinical).</li>
+              <li><strong>Expert Thinking:</strong> 500+ agent profiles encoding the reasoning patterns of senior scientists.</li>
+              <li><strong>Science-Superpowers:</strong> Methodology skills that enforce pre-registration and hypothesis validation.</li>
+              <li><strong>BixBench Leader:</strong> Outperforms raw models by 50%+ in bioinformatics tasks via hierarchical loops.</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>🏗️ Open Agent Skills</h4>
+              <p>Native compatibility with Gemini CLI, Claude Code, Cursor, and any OAS-compliant agent.</p>
+            </div>
+            <div class="card">
+              <h4>📂 Mimeo</h4>
+              <p>A specialized tool to "mimeograph" human expertise into structured agent-ready SOPs.</p>
+            </div>
+            <div class="card">
+              <h4>🎯 Recommended For</h4>
+              <p>Building custom multi-agent pipelines and standardizing lab-specific agentic workflows.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 24 SECTION TITLE: ENVIRONMENT & SETUP ════════════ -->
+      <section data-background-color="#0a1628" class="dark-slide">
+        <div class="tag">Section 05</div>
+        <h2 style="margin-top:0.3em;font-size:2.2em;">Environment <span class="gradient-text">&amp; Setup</span></h2>
+        <p style="font-size:0.85em;">Final technical preparation and installation of the course toolkit.</p>
+        <div class="sep"></div>
+      </section>
+
+      <!-- ══ 25 PREREQUISITES HEALTH CHECK ════════════════════ -->
+      <section>
+        <div class="tag">Environment</div>
+        <h2 style="margin-top:0.2em;">The "Health Check" <span class="gradient-text">Prerequisites</span></h2>
+        <p style="font-size:0.75em;margin-bottom:0.6em;">Before we begin the setup, ensure your local environment is ready for agentic tools.</p>
+        <div class="grid-2">
+          <div class="card card-bordered">
+            <h4>📦 System Packages</h4>
+            <ul class="no-bullets" style="font-size:0.65em;line-height:1.4;">
+              <li>✓ <strong>Node.js 18+:</strong> Required for Claude Code.</li>
+              <li>✓ <strong>Python 3.12+:</strong> Required for Scientific Agent Skills.</li>
+              <li>✓ <strong>Git:</strong> Installed and <code>user.email</code> configured.</li>
+              <li>✓ <strong>Terminal:</strong> VS Code Terminal, iTerm2, or PowerShell 7.</li>
+            </ul>
+          </div>
+          <div class="card card-bordered">
+            <h4>🔑 API & Access</h4>
+            <ul class="no-bullets" style="font-size:0.65em;line-height:1.4;">
+              <li>✓ <strong>Anthropic API Key:</strong> Funded with min. $5.</li>
+              <li>✓ <strong>Google Cloud Key:</strong> For Gemini CLI features.</li>
+              <li>✓ <strong>GitHub Account:</strong> For Copilot and skill discovery.</li>
+              <li>✓ <strong>Stable Internet:</strong> High-bandwidth for model streaming.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cta-box" style="margin-top:0.8em;padding:0.8em;">
+          <p style="margin:0;font-size:0.75em;font-weight:600;color:var(--db-primary);">Ready to Install? Proceed to Tool Options.</p>
+        </div>
+      </section>
+
+      <!-- ══ 26 TOOL OPTIONS ════════════════════════════════════ -->
+      <section>
+        <div class="tag">Tool Setup</div>
+        <h2 style="margin-top:0.2em;">Three Setup <span class="gradient-text">Paths</span></h2>
+        <div class="grid-3" style="margin-top:0.6em;">
+          <div class="card" style="border-top:2px solid var(--db-secondary);">
+            <div style="font-size:1.3em;margin-bottom:0.25em;">🐙</div>
+            <h4>VS Code + GitHub Copilot</h4>
+            <p>Already in VS Code ecosystem. Subscription-based. GPT-4o / Claude Sonnet backed.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;">Requires: VS Code, GitHub account, Copilot (~$10/mo)</p>
+          </div>
+          <div class="card card-highlight" style="border-top:2px solid var(--db-primary);">
+            <div style="font-size:1.3em;margin-bottom:0.25em;">⚡</div>
+            <h4>Claude Code <span style="font-size:0.65em;color:var(--db-accent);">Recommended</span></h4>
+            <p>Deep research workflows, rich skills ecosystem, powerful agentic mode. Terminal + IDE.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;">Requires: Node.js, Anthropic API key. Usage-based billing.</p>
+          </div>
+          <div class="card" style="border-top:2px solid var(--db-accent);">
+            <div style="font-size:1.3em;margin-bottom:0.25em;">🌐</div>
+            <h4>OpenCode + OpenRouter</h4>
+            <p>Model flexibility and cost optimization. One interface → Claude, GPT, Gemini, Llama.</p>
+            <p style="font-size:0.62em;color:var(--db-gray-400);margin-top:0.4em;">Requires: OpenRouter API key. Pay-per-token across models.</p>
+          </div>
+        </div>
+        <div class="quote-block" style="margin-top:0.8em;">
+          <strong>Recommended for this course: Claude Code</strong> — richest skills ecosystem, tightest integration with scientific agent skills we'll install. Works in terminal and VS Code.
+        </div>
+      </section>
+
+      <!-- ══ 27 INSTALL SCIENTIFIC AGENT SKILLS ════════════════ -->
+      <section>
+        <div class="tag">Setup</div>
+        <h2 style="margin-top:0.2em;">Install Scientific <span class="gradient-text">Agent Skills</span></h2>
+        <p style="font-size:0.73em;margin-bottom:0.4em;">
+          <strong>144 skills · 18 domains · 100+ databases</strong> · 27.9k ⭐ · used by 160,000+ scientists ·
+          <a href="https://github.com/K-Dense-AI/scientific-agent-skills">K-Dense-AI/scientific-agent-skills</a>
+        </p>
+        <div class="two-col">
+          <div>
+            <p class="section-label">Install (Python 3.13+, uv required)</p>
+            <div class="code-block">
+<span class="comment"># Install uv first (all platforms)</span>
+<span class="fn">curl</span> -LsSf https://astral.sh/uv/install.sh | sh
+
+<span class="comment"># NPX — recommended, works everywhere</span>
+<span class="fn">npx</span> skills add K-Dense-AI/scientific-agent-skills
+
+<span class="comment"># GitHub CLI alternative</span>
+<span class="fn">gh</span> skill install K-Dense-AI/scientific-agent-skills
+            </div>
+            <p style="font-size:0.68em;margin-top:0.4em;color:var(--db-gray-500);">Works with Claude Code, Cursor, Codex, Gemini CLI, and any Agent Skills-compatible tool. Security scanned via Cisco AI Defense.</p>
+            <div class="code-block" style="margin-top:0.5em;">
+<span class="comment"># Example: drug discovery workflow</span>
+<span class="string">"Query ChEMBL for EGFR inhibitors,
+analyze with RDKit, screen with DiffDock,
+check COSMIC, create report"</span>
+
+<span class="comment"># Example: single-cell analysis</span>
+<span class="string">"Load 10X data with Scanpy, integrate
+Cellxgene Census, run DESeq2"</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.42em;">
+            <p class="section-label">Skill Domains</p>
+            <div class="card">
+              <h4>🧬 Bioinformatics &amp; Genomics <span style="color:var(--db-gray-400);font-weight:400;">(23)</span></h4>
+              <p>Scanpy, BioPython, pysam, scVelo, PyDESeq2, RNA-seq, single-cell analysis</p>
+            </div>
+            <div class="card">
+              <h4>💊 Cheminformatics &amp; Drug Discovery <span style="color:var(--db-gray-400);font-weight:400;">(10)</span></h4>
+              <p>RDKit, Datamol, DiffDock, DeepChem, molecular dynamics, OpenMM</p>
+            </div>
+            <div class="card">
+              <h4>🏥 Clinical &amp; Precision Medicine <span style="color:var(--db-gray-400);font-weight:400;">(8)</span></h4>
+              <p>ClinicalTrials.gov, ClinVar, DepMap, clinical decision support, COSMIC</p>
+            </div>
+            <div class="card">
+              <h4>✍️ Scientific Communication <span style="color:var(--db-gray-400);font-weight:400;">(27)</span></h4>
+              <p>PubMed, literature review, scientific writing, peer review, presentations</p>
+            </div>
+            <div class="card">
+              <h4>🗄️ Databases <span style="color:var(--db-gray-400);font-weight:400;">(100+)</span></h4>
+              <p>PubChem, ChEMBL, UniProt, KEGG, STRING, Ensembl, FDA, ClinVar, FRED, USPTO</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 28 SCIENTIFIC WRITER SKILLS ══════════════════════ -->
+      <section>
+        <div class="tag">Setup</div>
+        <h2 style="margin-top:0.2em;">Claude Scientific <span class="gradient-text">Writer Skills</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p style="font-size:0.8em;">Two-stage pipeline: outline → full prose. Publication-quality text with citations. <a href="https://github.com/K-Dense-AI/claude-scientific-writer" style="font-size:0.9em;">K-Dense-AI/claude-scientific-writer</a></p>
+            <p class="section-label" style="margin-top:0.5em;">Install</p>
+            <div class="code-block">
+<span class="comment"># NPX — recommended, works everywhere</span>
+<span class="fn">npx</span> skills add K-Dense-AI/claude-scientific-writer
+
+<span class="comment"># GitHub CLI alternative</span>
+<span class="fn">gh</span> skill install K-Dense-AI/claude-scientific-writer
+            </div>
+            <p class="section-label" style="margin-top:0.6em;">Usage</p>
+            <div class="code-block">
+<span class="comment"># Invoke the writing skill</span>
+<span class="fn">/scientific-writing</span>
+
+<span class="comment"># With a direct task</span>
+<span class="fn">/scientific-writing</span> <span class="string">"Write the methods
+section for RNA-seq differential
+expression analysis using DESeq2"</span>
+            </div>
+            <p style="font-size:0.68em;margin-top:0.4em;color:var(--db-gray-500);">Skill uses <strong>research-lookup</strong> internally. Outputs IMRAD structure, APA/AMA/Vancouver citations.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <p class="section-label">Writing Skill Capabilities</p>
+            <div class="card" style="border-top:2px solid var(--db-primary);">
+              <h4>📄 Full Manuscripts</h4>
+              <p>Introduction → Methods → Results → Discussion. Section-by-section or full draft.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-secondary);">
+              <h4>🔬 Methods Sections</h4>
+              <p>Reproducible methods from protocols. Reagent lists, statistical parameters, software versions.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-accent);">
+              <h4>📋 Reporting Guidelines</h4>
+              <p>CONSORT / STROBE / PRISMA compliance built-in. Checklist-aware generation for clinical studies.</p>
+            </div>
+            <div class="card" style="border-top:2px solid var(--db-warning);">
+              <h4>💬 Peer Review Responses</h4>
+              <p>Point-by-point reviewer response letters with rebuttal arguments and manuscript edits.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 29 CAVEMAN SETUP ══════════════════════════════════ -->
+      <section>
+        <div class="tag">Token Management</div>
+        <h2 style="margin-top:0.2em;">Caveman: <span class="gradient-text">65% Output Reduction</span></h2>
+        <p style="font-size:0.75em;margin-bottom:0.5em;">
+          <strong>Caveman</strong> is a Claude Code skill that compresses agent output ~65% while keeping 100% technical accuracy.
+          <a href="https://github.com/juliusbrussee/caveman" style="font-size:0.9em;">github.com/juliusbrussee/caveman</a>
+        </p>
+        <div class="two-col">
+          <div>
+            <p class="section-label">Install (requires Node ≥18)</p>
+            <div class="code-block">
+<span class="comment"># macOS / Linux / WSL</span>
+<span class="fn">curl</span> -fsSL https://raw.githubusercontent.com/
+  JuliusBrussee/caveman/main/install.sh | bash
+
+<span class="comment"># Windows PowerShell 5.1+</span>
+<span class="fn">irm</span> https://raw.githubusercontent.com/
+  JuliusBrussee/caveman/main/install.ps1 | iex
+            </div>
+            <p style="font-size:0.68em;margin-top:0.45em;color:var(--db-gray-500);">~30 sec install. Re-runnable safely. Auto-activates for Claude Code, Codex, Gemini.</p>
+
+            <p class="section-label" style="margin-top:0.7em;">Before vs After</p>
+            <div class="code-block">
+<span class="comment"># Normal (1,180 tokens for React bug)</span>
+<span class="string">"The reason your React component is
+re-rendering is likely because you're
+creating a new object reference each render."</span>
+
+<span class="comment"># Caveman (159 tokens — 87% saved)</span>
+<span class="string">"New obj ref each render. Inline object
+prop = new ref = re-render. Wrap useMemo."</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.45em;">
+            <div class="card card-highlight">
+              <h4>⛏ Slash Commands</h4>
+              <p style="font-size:0.68em;line-height:1.8;">
+                <code style="background:var(--db-gray-200);padding:0.05em 0.3em;border-radius:3px;">/caveman [lite|full|ultra|wenyan]</code> — set compression level<br>
+                <code style="background:var(--db-gray-200);padding:0.05em 0.3em;border-radius:3px;">/caveman-stats [--share]</code> — session tokens saved + USD cost<br>
+                <code style="background:var(--db-gray-200);padding:0.05em 0.3em;border-radius:3px;">/caveman-commit</code> — conventional commits ≤50 chars<br>
+                <code style="background:var(--db-gray-200);padding:0.05em 0.3em;border-radius:3px;">/caveman-review</code> — one-line PR feedback with emoji<br>
+                <code style="background:var(--db-gray-200);padding:0.05em 0.3em;border-radius:3px;">/caveman-compress &lt;file&gt;</code> — compress memory files ~46%
+              </p>
+            </div>
+            <div class="card">
+              <h4>Compression Levels</h4>
+              <p style="font-size:0.68em;line-height:1.8;">
+                <strong>lite</strong> — drop filler text only<br>
+                <strong>full</strong> — default (fragments, minimal conjunctions)<br>
+                <strong>ultra</strong> — telegraphic, maximum brevity<br>
+                <strong>wenyan</strong> — classical Chinese encoding (most compact)
+              </p>
+            </div>
+            <div class="card">
+              <h4>Real Benchmarks</h4>
+              <p style="font-size:0.68em;line-height:1.8;">
+                React bug: 1,180 → 159 tokens <strong style="color:var(--db-accent);">(87% saved)</strong><br>
+                Auth fix: 704 → 121 tokens <strong style="color:var(--db-accent);">(83% saved)</strong><br>
+                PostgreSQL setup: 2,347 → 380 tokens <strong style="color:var(--db-accent);">(84% saved)</strong><br>
+                Memory files avg: <strong style="color:var(--db-accent);">46% reduction</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 30 FIRST INTERACTION EXERCISE ════════════════════ -->
+      <section>
+        <div class="tag-green tag">Hands-On</div>
+        <h2 style="margin-top:0.2em;">First Interaction &amp; <span class="gradient-text">Tool Comparison</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <p class="section-label">Exercise 1 — First Interaction</p>
+            <ol class="step-list">
+              <li>Open your chosen agent (Claude Code / Copilot / OpenCode)</li>
+              <li>Run: <em>"Summarize what CRISPR-Cas9 is in 3 sentences for a non-specialist."</em></li>
+              <li>Then: <em>"Add 2 recent applications in oncology."</em></li>
+              <li>Observe: Did it remember context? Hallucinate any studies?</li>
+              <li>Verify one claim against PubMed</li>
+            </ol>
+          </div>
+          <div>
+            <p class="section-label" style="color:var(--db-accent);">Exercise 2 — Tool Comparison</p>
+            <ol class="step-list">
+              <li>Run the same CRISPR prompt in <em>two</em> different tools</li>
+              <li>Compare: accuracy, speed, style, token usage</li>
+              <li>Try <code style="background:var(--db-gray-100);padding:0.1em 0.3em;border-radius:3px;font-size:0.9em;">/pubmed-database</code>: <em>"Find 3 reviews on CRISPR off-target effects"</em></li>
+              <li>Compare skill result vs plain chat result</li>
+            </ol>
+            <div class="card" style="margin-top:0.5em;border-top:2px solid var(--db-accent);">
+              <h4>✍️ Group Discussion</h4>
+              <p>Which tool felt most useful and why? No right answer — context matters.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 31 SUMMARY ════════════════════════════════════════ -->
+      <section>
+        <div class="tag-green tag">Summary</div>
+        <h2 style="margin-top:0.2em;">Session 01 <span class="gradient-text">Key Takeaways</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div>
+            <ul class="check-list">
+              <li>AI evolved: ML → DL → GenAI → Agentic AI</li>
+              <li>Agents automate research end-to-end in life sciences</li>
+              <li>LLMs predict tokens — they don't "know" facts</li>
+              <li>Agent ≠ Provider ≠ Model — layers are separable</li>
+              <li>Chat, coding agents, pipelines: different use cases</li>
+              <li>Skills = reusable instruction sets for specific tasks</li>
+              <li>Hallucination is real — always verify critical claims</li>
+              <li>Data privacy depends on where inference happens</li>
+              <li>Caveman mode reduces token cost on long sessions</li>
+            </ul>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5em;">
+            <div class="card card-highlight">
+              <h4>📅 Next Session</h4>
+              <p><strong>Session 02:</strong> Literature Search &amp; Review Automation — PubMed agent workflows, systematic review pipelines, citation management.</p>
+            </div>
+            <div class="card">
+              <h4>📚 Before Next Session</h4>
+              <p>Complete tool setup. Run first interaction exercise. Explore <code style="background:var(--db-gray-100);padding:0.1em 0.3em;border-radius:3px;">/get-available-resources</code> and note 3 skills relevant to your research.</p>
+            </div>
+            <div class="card">
+              <h4>❓ Questions &amp; Support</h4>
+              <p>Office hours: Thursdays 16:00–17:00 BST.<br>Email: <a href="mailto:work.jubayer@gmail.com">work.jubayer@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ 32 CLOSING ════════════════════════════════════════ -->
+      <section>
+        <div class="tag-amber tag">No Code &amp; Agentic AI for Life Sciences</div>
+        <h2 style="margin-top:0.3em;">Thank <span class="gradient-text">You</span></h2>
+        <div class="sep"></div>
+        <div class="cta-box" style="max-width:550px;margin:1em auto;">
+          <h3 style="font-size:0.95em;color:var(--db-gray-800);margin-top:0;">Get in Touch</h3>
+          <p style="font-size:0.75em;margin-bottom:0.3em;"><strong>Md. Jubayer Hossain</strong></p>
+          <p style="font-size:0.75em;margin-bottom:0;"><a href="https://bio.link/hossainlab">bio.link/hossainlab</a></p>
+        </div>
+        <div class="social-row" style="margin-top:1em;">
+          <a href="https://bio.link/deepbioltd" style="font-weight:600;color:var(--db-primary);">bio.link/deepbioltd</a>
+          <span class="social-dot"></span>
+          <a href="https://github.com/hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.linkedin.com/in/hossainmj/" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <span class="social-dot"></span>
+          <a href="https://www.youtube.com/@hossainlab" target="_blank" style="display:inline-flex;color:var(--db-gray-400);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        </div>
+        <p class="disclaimer">&copy; 2026 Md. Jubayer Hossain &middot; No Code &amp; Agentic AI for Life Sciences — Session 01</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      width: 1200,
+      height: 680,
+      margin: 0.06,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: true,
+      controls: false,
+      progress: true,
+      pdfSeparateFragments: false,
+      pdfMaxPagesPerSlide: 1,
+    });
+  </script>
+</body>
+</html>

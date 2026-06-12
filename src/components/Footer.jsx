@@ -15,6 +15,7 @@ export default function Footer() {
         <div className={styles.links}>
           <a href="#overview">Overview</a>
           <a href="#curriculum">Curriculum</a>
+          <a href="#sessions">Materials</a>
           <a href="#">Apply Now</a>
         </div>
       </div>

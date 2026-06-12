@@ -15,7 +15,9 @@
       "WebFetch(domain:www.bioconductor.org)",
       "WebFetch(domain:commons.wikimedia.org)",
       "WebFetch(domain:biopython.org)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(gh api *)",
+      "WebFetch(domain:bio.link)"
     ]
   }
 }
