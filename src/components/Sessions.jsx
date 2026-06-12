@@ -1,13 +1,22 @@
 import styles from './Sessions.module.css';
 
 export default function Sessions() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const sessions = [
     {
       id: "01",
       title: "No-Code Tools Setup & Foundations",
       date: "Session 01",
       description: "Getting started with the course environment, setting up essential no-code tools, and understanding the foundations of Agentic AI in Life Sciences.",
-      link: "/session-01/index.html",
+      link: `${basePath}/session-01/index.html`,
+      type: "Presentation"
+    },
+    {
+      id: "02",
+      title: "Prompt and Context Engineering",
+      date: "Session 02",
+      description: "Mastering the art of structuring directives using the RTFC framework, managing context windows, and implementing the P-A-E-I workflow.",
+      link: `${basePath}/session-02/index.html`,
       type: "Presentation"
     }
   ];
