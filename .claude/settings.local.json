@@ -17,7 +17,15 @@
       "WebFetch(domain:biopython.org)",
       "WebFetch(domain:github.com)",
       "Bash(gh api *)",
-      "WebFetch(domain:bio.link)"
+      "WebFetch(domain:bio.link)",
+      "Skill(scientific-slides)",
+      "Bash(python -c 'import html.parser,sys *)",
+      "Bash(python -c 'import html.parser *)",
+      "Bash(where chrome *)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(cp /tmp/stage1.png \"H:/Webs/NoCodeAI4LS/_s1.png\")",
+      "Bash(cp /tmp/stage5.png \"H:/Webs/NoCodeAI4LS/_s5.png\")",
+      "Read(//h/Webs/NoCodeAI4LS/**)"
     ]
   }
 }

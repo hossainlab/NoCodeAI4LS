@@ -201,6 +201,121 @@
     .social-row a:hover { color: var(--db-primary); }
     .social-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--db-gray-300); display: inline-block; }
 
+    /* ── Card shells (light, professional) ── */
+    .code-block, .prompt-box {
+      background: #fff; color: var(--db-gray-700);
+      border: 1px solid var(--db-gray-200); border-left: 3px solid var(--db-primary);
+      border-radius: 12px; text-align: left;
+      box-shadow: 0 6px 20px rgba(15,23,40,0.07);
+      position: relative; overflow: hidden;
+    }
+    /* literal code / system-prompt block keeps monospace */
+    .code-block {
+      padding: 1.1em 1.2em; font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.6em; line-height: 1.65; white-space: pre-wrap;
+    }
+    /* prompt card = readable plain text */
+    .prompt-box {
+      padding: 0; font-family: var(--font-body); font-size: 0.74em; color: var(--db-gray-700);
+    }
+    .prompt-box .pb-label {
+      display: flex; align-items: center; gap: 0.5em; padding: 0.6em 1em;
+      font-family: var(--font-heading); font-weight: 700;
+      letter-spacing: 0.03em; text-transform: uppercase; font-size: 0.78em;
+      color: #fff; background: linear-gradient(135deg, var(--db-primary), #2f7ab8);
+    }
+    .prompt-box .pb-label::before { content: "✦"; font-size: 0.95em; opacity: 0.85; }
+    .prompt-box .pb-body { padding: 0.9em 1.05em 0.95em; }
+    .prompt-box .pb-intro { margin: 0 0 0.7em; color: var(--db-gray-700); line-height: 1.5; }
+    .prompt-box .pb-intro:last-child { margin-bottom: 0; }
+    .prompt-box .pb-fields { display: grid; grid-template-columns: 1fr; gap: 0.4em; margin: 0.2em 0 0.1em; }
+    .prompt-box .pb-fields.two { grid-template-columns: 1fr 1fr; gap: 0.4em 0.9em; }
+    .prompt-box .pb-fields > div { display: flex; align-items: baseline; gap: 0.5em; line-height: 1.35; }
+    .prompt-box .pb-fields em { color: var(--db-gray-400); font-style: italic; font-size: 0.92em; }
+    .prompt-box .pb-asks { margin: 0.5em 0 0; padding: 0; list-style: none; }
+    .prompt-box .pb-asks li {
+      position: relative; padding: 0.16em 0 0.16em 1.3em; font-size: 0.96em; color: var(--db-gray-600); line-height: 1.4;
+    }
+    .prompt-box .pb-asks li::before {
+      content: ""; position: absolute; left: 0.15em; top: 0.62em;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--db-secondary);
+    }
+    .prompt-box .pb-out {
+      display: block; padding: 0.6em 1.05em;
+      background: rgba(16,185,129,0.07); border-top: 1px solid var(--db-gray-200);
+      color: var(--db-gray-600); font-size: 0.96em; line-height: 1.4;
+    }
+    .prompt-box .pb-out b { color: var(--db-accent); }
+    .code-block .comment { color: var(--db-gray-400); font-style: italic; }
+    .code-block .keyword { color: var(--db-primary); font-weight: 700; }
+    .prompt-box .ph {
+      display: inline-block; font-weight: 700; font-size: 0.88em; color: var(--db-primary);
+      background: rgba(32,94,146,0.08); border: 1px solid rgba(32,94,146,0.16);
+      border-radius: 5px; padding: 0.04em 0.42em; white-space: nowrap;
+    }
+    .reveal code {
+      font-family: 'SFMono-Regular', Consolas, monospace; font-size: 0.85em;
+      background: var(--db-gray-100); color: var(--db-primary);
+      padding: 0.08em 0.4em; border-radius: 5px; border: 1px solid var(--db-gray-200);
+    }
+
+    /* ── Framework chips ── */
+    .fw-chips { display: flex; flex-wrap: wrap; gap: 0.35em; margin: 0.45em 0; }
+    .fw-chip {
+      font-size: 0.6em; font-weight: 700; padding: 0.28em 0.7em; border-radius: 6px;
+      background: rgba(32,94,146,0.08); color: var(--db-primary); border: 1px solid rgba(32,94,146,0.18);
+    }
+
+    /* ── Stage layout ── */
+    .stage-grid {
+      display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 1.1em;
+      align-items: stretch; margin-top: 0.7em;
+    }
+    .think-card {
+      background: var(--db-gray-50); border: 1px solid var(--db-gray-200);
+      border-radius: 12px; padding: 0.9em 1.1em; text-align: left;
+    }
+    .think-label {
+      font-size: 0.62em; font-weight: 700; color: var(--db-primary);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5em;
+      display: flex; align-items: center; gap: 0.4em;
+    }
+    .think-card ul li { font-size: 0.78em; padding-top: 0.3em; padding-bottom: 0.3em; }
+
+    /* ── Stage badge ── */
+    .stage-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 1.7em; height: 1.7em; padding: 0 0.4em; border-radius: 8px;
+      background: var(--db-primary); color: #fff;
+      font-family: var(--font-heading); font-weight: 800; font-size: 0.9em; margin-right: 0.45em;
+    }
+    .stage-head { display: flex; align-items: center; }
+    .stage-head h2 { margin: 0; font-size: 1.4em; }
+
+    /* ── Stage map (divider) ── */
+    .stage-map { display: grid; grid-template-columns: repeat(5,1fr); gap: 0.5em; margin-top: 0.9em; }
+    .stage-map .sm {
+      background: var(--db-gray-50); border: 1px solid var(--db-gray-200);
+      border-radius: 8px; padding: 0.5em 0.6em; text-align: left; font-size: 0.62em; color: var(--db-gray-600);
+    }
+    .stage-map .sm b { display: block; color: var(--db-primary); font-size: 1.15em; margin-bottom: 0.1em; }
+
+    /* ── Danger box ── */
+    .danger-box {
+      border: 2px solid var(--db-danger); background: rgba(239,68,68,0.05);
+      border-radius: 14px; padding: 1em 1.4em; text-align: left;
+    }
+
+    /* ── Cheat-sheet table ── */
+    .reveal table.cheat { width: 100%; border-collapse: collapse; font-size: 0.6em; margin-top: 0.5em; }
+    .reveal table.cheat th {
+      background: var(--db-primary); color: #fff; padding: 0.5em 0.7em; text-align: left;
+      font-family: var(--font-heading); font-weight: 700;
+    }
+    .reveal table.cheat td { padding: 0.42em 0.7em; border-bottom: 1px solid var(--db-gray-200); color: var(--db-gray-600); }
+    .reveal table.cheat tr:nth-child(even) td { background: var(--db-gray-50); }
+    .reveal table.cheat td strong { color: var(--db-primary); }
+
     @media print {
       .reveal-viewport { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .reveal .slides section { page-break-after: always; page-break-inside: avoid; }
@@ -405,6 +520,527 @@
         </div>
       </section>
 
+      <!-- ══ TOOLKIT DIVIDER ═══════════════════════════════════ -->
+      <section>
+        <div class="tag">Framework-Based Toolkit</div>
+        <h2 style="margin-top:0.2em;">AI Prompts for <span class="gradient-text">Literature Review</span></h2>
+        <div class="sep" style="margin-left:0;"></div>
+        <p style="font-size:0.84em;max-width:780px;">Each prompt anchored to an established methodology — students practice the <strong>thinking</strong>, not just the prompting. AI is scaffolding, not a shortcut.</p>
+        <div class="stage-map">
+          <div class="sm"><b>1</b> Scope question</div>
+          <div class="sm"><b>2</b> Search strategy</div>
+          <div class="sm"><b>3</b> Screen &amp; select</div>
+          <div class="sm"><b>4</b> Critical appraisal</div>
+          <div class="sm"><b>5</b> Extract &amp; matrix</div>
+          <div class="sm"><b>6</b> Thematic synthesis</div>
+          <div class="sm"><b>7</b> Gap analysis</div>
+          <div class="sm"><b>8</b> Theory mapping</div>
+          <div class="sm"><b>9</b> Write narrative</div>
+          <div class="sm"><b>10</b> Self-audit</div>
+        </div>
+      </section>
+
+      <!-- ══ GROUND RULE ═══════════════════════════════════════ -->
+      <section>
+        <div class="tag-amber tag">⚠ Non-Negotiable Ground Rule</div>
+        <h2 style="margin-top:0.2em;">Verify <span class="gradient-text">Every Citation</span></h2>
+        <div class="danger-box" style="margin-top:0.7em;">
+          <p style="font-size:0.85em;color:var(--db-gray-700);margin:0;">AI models <strong style="color:var(--db-danger);">fabricate</strong> citations, authors, journal names, even plausible-looking DOIs.</p>
+        </div>
+        <div class="grid-2" style="margin-top:0.8em;">
+          <div class="card card-highlight">
+            <h4>✅ The Rule</h4>
+            <p>Every reference must be independently verified in a real database before it appears in any written work.</p>
+          </div>
+          <div class="card">
+            <h4>🔎 Where to Verify</h4>
+            <p>Google Scholar · Scopus · Web of Science · PubMed. Treat AI output as a <strong>draft to verify</strong>, never a source to cite directly.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 1 — SCOPING ═════════════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">1</span><h2>Scoping the <span class="gradient-text">Research Question</span></h2></div>
+        <div class="fw-chips">
+          <span class="fw-chip">PICO(S/T) — clinical</span>
+          <span class="fw-chip">SPIDER — qualitative</span>
+          <span class="fw-chip">SPICE — service/policy</span>
+          <span class="fw-chip">FINER — feasibility</span>
+        </div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li><strong>PICO</strong> = Population · Intervention · Comparison · Outcome.</li>
+              <li>Ask for <strong>narrow / moderate / broad</strong> — then judge the scope yourself.</li>
+              <li>Run a <strong>FINER</strong> gut-check before committing.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 1.1 · PICO</span>
+            <div class="pb-body">
+              <p class="pb-intro">Structure a focused PICO question, then give 3 phrasings — <strong>narrow / moderate / broad</strong> — and flag any too broad for one review.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Population</span><em>adults with type-2 diabetes</em></div>
+                <div><span class="ph">Intervention</span><em>intermittent fasting</em></div>
+                <div><span class="ph">Comparison</span><em>standard calorie diet</em></div>
+                <div><span class="ph">Outcome</span><em>HbA1c reduction</em></div>
+              </div>
+            </div>
+            <span class="pb-out"><b>You get →</b> three scoped questions + a scope-creep warning.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 2 — SEARCH STRATEGY ═════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">2</span><h2>Search <span class="gradient-text">Strategy Design</span></h2></div>
+        <div class="fw-chips">
+          <span class="fw-chip">Boolean AND / OR / NOT</span>
+          <span class="fw-chip">Controlled vocab (MeSH)</span>
+          <span class="fw-chip">PRISMA-S reporting</span>
+        </div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Expand <strong>every concept</strong>: synonyms, variants, MeSH terms.</li>
+              <li>Combine with Boolean <strong>AND / OR / NOT</strong>.</li>
+              <li>Audit like a peer reviewer — gaps, over-restriction, reproducibility.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 2.1 · Keywords</span>
+            <div class="pb-body">
+              <p class="pb-intro">For each concept in my question, build the search vocabulary and a ready-to-paste Boolean string.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Concept</span><em>intermittent fasting</em></div>
+                <div><span class="ph">Database</span><em>PubMed → adapt for Scopus</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Synonyms, related terms &amp; spelling variants</li>
+                <li>Controlled vocabulary (e.g., MeSH terms)</li>
+                <li>Boolean AND / OR / NOT string — flag ambiguous terms</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a database-ready search string + ambiguity flags.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 3 — SCREENING ═══════════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">3</span><h2>Screening <span class="gradient-text">&amp; Selection</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">PRISMA 2020 flow: identify → screen → eligibility → include</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Draft inclusion / exclusion criteria as a <strong>defensible table</strong>.</li>
+              <li>Cover population, design, pub type, dates, language, outcomes.</li>
+              <li style="color:var(--db-danger);"><strong>Use cautiously:</strong> students screen first, then compare.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 3.2 · Screening (cautious)</span>
+            <div class="pb-body">
+              <p class="pb-intro">Judge whether one study meets my criteria — give a verdict <strong>and</strong> a reason per criterion.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Title + abstract</span><em>paste the record</em></div>
+                <div><span class="ph">Criteria</span><em>RCTs · adults · 2015+ · English</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Verdict: Include / Exclude / Unclear</li>
+                <li>Justify against each criterion individually</li>
+                <li>Flag anything you can't judge from the abstract</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a per-criterion verdict — never a final decision.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 4 — CRITICAL APPRAISAL (FRAMEWORK) ══════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">4</span><h2>Critical Appraisal of <span class="gradient-text">Methodology</span></h2></div>
+        <div class="fw-chips">
+          <span class="fw-chip">CASP checklists</span>
+          <span class="fw-chip">GRADE — certainty</span>
+          <span class="fw-chip">Cochrane Risk of Bias</span>
+        </div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Apply the <strong>design-specific CASP</strong> checklist, item by item.</li>
+              <li>Scan bias: selection, measurement, confounding, publication, reporting.</li>
+              <li>Separate bias authors <em>acknowledge</em> from bias they don't.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 4.1 · CASP critique</span>
+            <div class="pb-body">
+              <p class="pb-intro">Apply the design-specific CASP checklist and judge rigor — do not summarize.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Methods section</span><em>paste the text</em></div>
+                <div><span class="ph">Design</span><em>RCT / cohort / qualitative</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Go through each checklist item in turn</li>
+                <li>Rate: adequate / partial / not addressed</li>
+                <li>One-line justification per item</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> an item-by-item rigor verdict, not a summary.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 5 — EXTRACTION & MATRIX ═════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">5</span><h2>Data Extraction &amp; <span class="gradient-text">Synthesis Matrix</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Garrard's matrix method</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Extract into a table — <strong>explicit content only</strong>, no inference.</li>
+              <li>Cols: Author/Year, Design, Sample, Variables, Findings, Limitations.</li>
+              <li>Cross-tab themes × studies → convergence vs. contradiction.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 5.2 · Pattern matrix</span>
+            <div class="pb-body">
+              <p class="pb-intro">Turn my extraction table into a themes × studies matrix and read the patterns.</p>
+              <div class="pb-fields">
+                <div><span class="ph">Extraction table</span><em>paste — rows = studies</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Themes with strong convergence across studies</li>
+                <li>Themes with contradictory findings — name the studies</li>
+                <li>Themes in only 1–2 studies (under-researched)</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a themes × studies map of agreement &amp; gaps.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 6 — THEMATIC SYNTHESIS ══════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">6</span><h2>Thematic / <span class="gradient-text">Narrative Synthesis</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Thomas &amp; Harden — descriptive → analytical themes</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li><strong>Step 1:</strong> line-by-line descriptive codes, close to findings.</li>
+              <li><strong>Step 2:</strong> group codes into descriptive themes.</li>
+              <li><strong>Step 3:</strong> analytical themes that go beyond the studies.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 6.1 · Inductive themes</span>
+            <div class="pb-body">
+              <p class="pb-intro">Build themes from the ground up — show your reasoning at each step.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Findings</span><em>summaries from N studies</em></div>
+                <div><span class="ph">Question</span><em>my review question</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Step 1 → line-by-line descriptive codes</li>
+                <li>Step 2 → group codes into descriptive themes</li>
+                <li>Step 3 → analytical themes answering my question</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a coded trail from raw findings to new themes.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 7 — GAP ANALYSIS ════════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">7</span><h2>Gap Analysis &amp; <span class="gradient-text">Future Questions</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Robinson et al. — PICO-based gap mapping</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li><strong>Population</strong> gaps — groups understudied.</li>
+              <li><strong>Intervention / Outcome</strong> gaps — variants &amp; measures untested.</li>
+              <li><strong>Methodological</strong> gaps — designs underused.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 7.1 · Find the gap</span>
+            <div class="pb-body">
+              <p class="pb-intro">Run a PICO-based gap analysis and turn each gap into a researchable question.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Synthesis</span><em>what's known so far</em></div>
+                <div><span class="ph">Topic</span><em>intermittent fasting &amp; T2D</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Population / intervention / outcome / method gaps</li>
+                <li>Why each gap matters</li>
+                <li>One researchable question per gap</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> mapped gaps, each with a researchable question.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 8 — THEORY MAPPING ══════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">8</span><h2>Theoretical / <span class="gradient-text">Conceptual Mapping</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Theory-family mapping across the literature</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Group studies by <strong>theoretical lineage / family</strong>.</li>
+              <li>Identify where theories <strong>compete vs. complement</strong>.</li>
+              <li>Judge if an integrated framework is justified — sketch it.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 8.1 · Map theories</span>
+            <div class="pb-body">
+              <p class="pb-intro">Map the theories used across my studies and judge whether to integrate them.</p>
+              <div class="pb-fields">
+                <div><span class="ph">Studies + theory</span><em>"Smith 2019 – SCT; Lee 2021 – TAM"</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Group studies by theoretical lineage / family</li>
+                <li>Where do theories compete vs. complement?</li>
+                <li>Is an integrated framework justified? Sketch it</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> theory families + a candidate integrated framework.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 9 — WRITING NARRATIVE ═══════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">9</span><h2>Writing the <span class="gradient-text">Review Narrative</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Ask for structure &amp; critique — not finished prose</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Get a <strong>paragraph-by-paragraph order</strong> for the synthesis.</li>
+              <li>Decide where contradictions are addressed.</li>
+              <li style="color:var(--db-primary);"><strong>The analytical writing stays yours.</strong></li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 9.1 · Structure only</span>
+            <div class="pb-body">
+              <p class="pb-intro">Plan the synthesis section — give an <strong>outline, not prose</strong>. I write the analysis.</p>
+              <div class="pb-fields two">
+                <div><span class="ph">Themes</span><em>from Stage 6</em></div>
+                <div><span class="ph">Gaps</span><em>from Stage 7</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Paragraph-by-paragraph theme order</li>
+                <li>Where contradictions are addressed</li>
+                <li>How the gap leads into my research question</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a section outline to write against — not the prose.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STAGE 10 — SELF-AUDIT ═════════════════════════════ -->
+      <section>
+        <div class="stage-head"><span class="stage-badge">10</span><h2>Self-Audit Before <span class="gradient-text">Submission</span></h2></div>
+        <div class="fw-chips"><span class="fw-chip">Integrity &amp; rigor check</span></div>
+        <div class="stage-grid">
+          <div class="think-card">
+            <div class="think-label">🧠 How to think</div>
+            <ul>
+              <li>Catch claims that don't match what the source found.</li>
+              <li>Flag overgeneralizations beyond the cited evidence.</li>
+              <li>Surface missing counter-evidence &amp; logical gaps.</li>
+            </ul>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">Prompt 10.1 · Final check</span>
+            <div class="pb-body">
+              <p class="pb-intro">Audit my draft for integrity — list issues by paragraph, don't rewrite.</p>
+              <div class="pb-fields">
+                <div><span class="ph">Draft review</span><em>paste full text</em></div>
+              </div>
+              <ul class="pb-asks">
+                <li>Claims that don't match the cited source</li>
+                <li>Overgeneralizations beyond the evidence</li>
+                <li>Missing counter-evidence &amp; logic gaps</li>
+              </ul>
+            </div>
+            <span class="pb-out"><b>You get →</b> a paragraph-indexed issue list to fix yourself.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ CHEAT SHEET ═══════════════════════════════════════ -->
+      <section>
+        <div class="tag">Quick Reference</div>
+        <h2 style="margin-top:0.2em;">Framework <span class="gradient-text">Cheat Sheet</span></h2>
+        <table class="cheat">
+          <thead><tr><th>Stage</th><th>Framework</th><th>Best for</th></tr></thead>
+          <tbody>
+            <tr><td>Question scoping</td><td><strong>PICO(S/T)</strong></td><td>Clinical / quantitative questions</td></tr>
+            <tr><td>Question scoping</td><td><strong>SPIDER</strong></td><td>Qualitative questions</td></tr>
+            <tr><td>Question scoping</td><td><strong>FINER</strong></td><td>Feasibility check</td></tr>
+            <tr><td>Search strategy</td><td><strong>PRISMA-S</strong></td><td>Reproducible search reporting</td></tr>
+            <tr><td>Screening</td><td><strong>PRISMA 2020</strong></td><td>Selection flow / reporting</td></tr>
+            <tr><td>Appraisal</td><td><strong>CASP</strong></td><td>Design-specific quality checklists</td></tr>
+            <tr><td>Appraisal</td><td><strong>GRADE</strong></td><td>Certainty of evidence across studies</td></tr>
+            <tr><td>Synthesis</td><td><strong>Thomas &amp; Harden</strong></td><td>Thematic synthesis (qualitative)</td></tr>
+            <tr><td>Gap analysis</td><td><strong>PICO-based gap mapping</strong></td><td>Identifying researchable gaps</td></tr>
+          </tbody>
+        </table>
+        <p class="disclaimer" style="margin-top:0.5em;">Instructor tip: pair each stage with a reflection — "What did the AI oversimplify, and how would you know without checking the source?"</p>
+      </section>
+
+      <!-- ══ NOTEBOOKLM DIVIDER ════════════════════════════════ -->
+      <section>
+        <div class="tag-green tag">Standalone Handout</div>
+        <h2 style="margin-top:0.2em;"><span class="gradient-text">NotebookLM</span> Prompts for Literature Review</h2>
+        <p style="font-size:0.82em;max-width:800px;margin-bottom:0.5em;">Pairs with the framework toolkit — but works on its own. NotebookLM reasons <strong>only over what you upload</strong>.</p>
+        <div class="grid-2" style="text-align:left;">
+          <div class="card-bordered" style="border-left:3px solid var(--db-primary);">
+            <h4>📂 One notebook per topic</h4>
+            <p>Upload full text (not abstracts) of every included study as a separate Source, named like <code>Smith_2021.pdf</code> so citations map back cleanly.</p>
+          </div>
+          <div class="card-bordered" style="border-left:3px solid var(--db-accent);">
+            <h4>🔗 Citation-tracked answers</h4>
+            <p>Every claim links to a passage in your sources — it can't fabricate a finding outside your set.</p>
+          </div>
+          <div class="card-bordered" style="border-left:3px solid var(--db-warning);">
+            <h4>🚫 No outside search</h4>
+            <p>Won't tell you what the wider field says. Still need Scholar/Scopus to <strong>build</strong> the source set.</p>
+          </div>
+          <div class="card-bordered" style="border-left:3px solid var(--db-secondary);">
+            <h4>🎛️ Studio panel</h4>
+            <p>Audio/Video Overview, Mind Map, Study Guide, Briefing Doc, FAQ, Timeline — mostly one-click, not freeform prompts.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NLM — FAMILIARIZE & SYNTHESIZE ════════════════════ -->
+      <section>
+        <div class="tag-green tag">NotebookLM · Chat Prompts</div>
+        <h2 style="margin-top:0.2em;">Familiarize &amp; <span class="gradient-text">Synthesize</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div class="prompt-box">
+            <span class="pb-label">A · Per uploaded study</span>
+            <div class="pb-body">
+              <p class="pb-intro">Summarize this source's research question, methodology, sample/setting and key findings — <strong>cite the section or page</strong> for each point, and note limitations the authors acknowledge.</p>
+            </div>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">B · Cross-source synthesis</span>
+            <div class="pb-body">
+              <p class="pb-intro">Across all sources, what are the most consistent findings on <span class="ph">Theme</span>? Name which sources support each claim — include nothing not directly stated in the sources.</p>
+              <div class="pb-fields"><div><span class="ph">Theme</span><em>weight-loss outcomes</em></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NLM — CONTRADICTION & TABLE ═══════════════════════ -->
+      <section>
+        <div class="tag-green tag">NotebookLM · Chat Prompts</div>
+        <h2 style="margin-top:0.2em;">Contradictions &amp; <span class="gradient-text">Comparison Table</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div class="prompt-box">
+            <span class="pb-label">C · Contradiction detection</span>
+            <div class="pb-body">
+              <p class="pb-intro">Which sources in this notebook disagree on <span class="ph">Finding</span>? Name the sources involved and summarize what each one claims.</p>
+              <div class="pb-fields"><div><span class="ph">Finding</span><em>fasting's effect on HbA1c</em></div></div>
+            </div>
+          </div>
+          <div class="prompt-box">
+            <span class="pb-label">D · Methodology table</span>
+            <div class="pb-body">
+              <p class="pb-intro">Build a comparison table across all sources, and cite each row to its source.</p>
+              <ul class="pb-asks">
+                <li>Source · Research design</li>
+                <li>Sample / setting · Key variables</li>
+                <li>Main finding</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NLM — GAP IDENTIFICATION ══════════════════════════ -->
+      <section>
+        <div class="tag-green tag">NotebookLM · Chat Prompts</div>
+        <h2 style="margin-top:0.2em;">Gap <span class="gradient-text">Identification</span></h2>
+        <div class="two-col" style="margin-top:0.5em;">
+          <div class="prompt-box">
+            <span class="pb-label">E · Gaps within your set</span>
+            <div class="pb-body">
+              <p class="pb-intro">Based only on the sources in this notebook, what aspects of <span class="ph">Topic</span> are not addressed, underexplored, or measured in only one source?</p>
+              <div class="pb-fields"><div><span class="ph">Topic</span><em>intermittent fasting &amp; T2D</em></div></div>
+            </div>
+          </div>
+          <div class="danger-box">
+            <h4 style="margin:0 0 0.3em 0;color:var(--db-danger);font-size:0.85em;">⚠ Caveat</h4>
+            <p style="font-size:0.78em;color:var(--db-gray-700);margin:0;">Reveals gaps <strong>within your uploaded set only</strong> — not gaps in the broader literature you haven't found yet. That still needs database search skills.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NLM — STUDIO OUTPUTS ══════════════════════════════ -->
+      <section>
+        <div class="tag-green tag">NotebookLM · Studio</div>
+        <h2 style="margin-top:0.2em;">Using <span class="gradient-text">Studio Outputs</span></h2>
+        <div class="grid-3" style="margin-top:0.6em;">
+          <div class="card-bordered" style="border-top:3px solid var(--db-primary);">
+            <h4>📄 Study Guide / FAQ / Briefing</h4>
+            <p>First-pass orientation before deep reading — not a substitute for reading the primary sources.</p>
+          </div>
+          <div class="card-bordered" style="border-top:3px solid var(--db-secondary);">
+            <h4>🗺️ Mind Map</h4>
+            <p>Auto-generated, not promptable. Click a node, then ask in chat: "Which sources support this sub-theme — do any contradict it?"</p>
+          </div>
+          <div class="card-bordered" style="border-top:3px solid var(--db-accent);">
+            <h4>🎧 Audio Overview</h4>
+            <p>Steerable with a focus instruction → turn it into a critical-appraisal conversation.</p>
+          </div>
+        </div>
+        <div class="prompt-box" style="margin-top:0.8em;">
+          <span class="pb-label">Audio Overview · focus steer</span>
+          <div class="pb-body">
+            <p class="pb-intro">Focus on methodological strengths and weaknesses across these sources, not just a summary of findings. Treat it as a critical-appraisal conversation — where do the studies disagree on rigor, and why?</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NLM — LIMITATIONS ═════════════════════════════════ -->
+      <section>
+        <div class="tag-amber tag">Before You Rely On It</div>
+        <h2 style="margin-top:0.2em;">Limitations to <span class="gradient-text">Know</span></h2>
+        <div class="grid-2" style="margin-top:0.7em;">
+          <div class="card card-highlight">
+            <h4>🧪 Grounding ≠ validation</h4>
+            <p>It won't invent citations outside your sources — but it does <strong>not</strong> check whether the uploaded papers are accurate, peer-reviewed, or unbiased. Critical appraisal stays your job.</p>
+          </div>
+          <div class="card">
+            <h4>📊 Hard caps</h4>
+            <p>Free tier limits Audio Overview generations per day; individual sources have size limits. Plan uploads for large review sets.</p>
+          </div>
+        </div>
+        <div class="quote-block" style="margin-top:0.8em;">Source-grounding stops fabrication <em>outside</em> your set — it does not make the set itself trustworthy.</div>
+      </section>
+
       <!-- ══ SUMMARY ══════════════════════════════════════════ -->
       <section>
         <div class="tag-green tag">Summary</div>
@@ -419,6 +1055,7 @@
             <li>Claude Projects create persistent lit assistants.</li>
             <li>NotebookLM is the king of source-grounded synthesis.</li>
             <li>Use AI as a "Critical Skeptic" to audit paper quality.</li>
+            <li>Anchor every prompt to a framework — verify every citation.</li>
           </ul>
         </div>
         <div class="card-highlight card" style="margin-top:1em;text-align:center;">
